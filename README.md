@@ -1,6 +1,6 @@
 # Crafts by Jame
 
-A mobile-first responsive website for Crafts by Jame, a custom craft booth business. Visitors can browse the products, see packages and book the booth for their event, and check upcoming pop-ups.
+A responsive website for Crafts by Jame, a custom craft booth business. Visitors can browse the products, see packages and book the booth for their event, and check upcoming pop-ups.
 
 ## Pages
 
@@ -62,6 +62,3 @@ Past events are hidden automatically. Anything in a published tab is public, so 
 - [ ] Desktop styles
 - [ ] Booking form submission
 
-## License and credits
-
-Add your license here. If the code is open source, note that the logo, photos and other brand assets belong to Crafts by Jame and are not covered by the code license.
