@@ -1,0 +1,126 @@
+
+@font-face {
+  font-family: 'JI Chubby Caps';
+  src: url('fonts/JI Chubby Caps.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ahkio-W00-Light';
+  src: url('fonts/Ahkio-W00-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.chelsea-market-regular {
+  font-family: "Chelsea Market", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.koulen-regular {
+  font-family: "Koulen", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+
+}
+
+/*PHONE VIEWPORT/BASE STYLES*/
+
+/*BODY STYLES*/
+.flower {
+  position: absolute;
+}
+
+#logo img {
+  height: 63px;
+  width: 63px;
+}
+
+.chelsea {
+  font-family: "Chelsea Market", system-ui;
+}
+
+.koulen {
+  font-family: "Koulen", sans-serif;
+}
+
+.jl_chubby {
+  font-family: 'JI Chubby Caps', sans-serif;
+}
+
+.ahkio {
+  font-family: 'Ahkio-W00-Light', sans-serif;
+}
+/*HEADER STYLES*/
+
+/*NAVIGATION STYLES*/
+
+/*FOOTER STYLES*/
+
+/*HOMEPAGE STYLES*/
+/*HOME LANDING SECTION STYLES*/
+
+#photo_display {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  height: 250px;
+  margin: 0 auto;
+}
+
+.photo_container {
+  position: absolute;
+  padding: 5px;
+  background: white;
+  box-shadow: 0 3px 7px #0003;
+  box-sizing: border-box;
+}
+
+.photo_container img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Left photo */
+#photo_1_container {
+  width: 39%;
+  height: 72%;
+  right: 9%;
+  top: 7%;
+  transform: rotate(4deg);
+  z-index: 1;
+}
+
+/* Center photo */
+#photo_2_container {
+  width: 39%;
+  height: 76%;
+  left: 30.5%;
+  top: 14%;
+  z-index: 2;
+}
+
+/* Right photo */
+#photo_3_container {
+  width: 39%;
+  height: 72%;
+  left: 9%;
+  top: 7%;
+  transform: rotate(-5deg);
+  z-index: 1;
+}
+

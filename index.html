@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crafts by Jame</title>
+
+    <link href="styles.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/logo.png">
+
+    <script src="script.js" defer></script>
+  </head>
+
+  <body>
+    <header id="site_header">
+      <a id="logo" href="index.html"><img src="img/logo.png" alt="Crafts by Jame Logo"></a>
+
+      <!-- Hamburger icon (visible on phone) -->
+      <button id="menu_open" class="menu_toggle" type="button"
+              aria-label="Open menu" aria-controls="site_nav" aria-expanded="false">
+        <img src="img/hamburger.svg" alt="">
+      </button>
+
+      <!-- The white menu panel from your "Hamburger" frame -->
+      <nav id="site_nav" aria-label="Main menu">
+        <button id="menu_close" class="menu_toggle" type="button" aria-label="Close menu">
+          <img src="img/close.svg" alt="">
+        </button>
+        <ul>
+          <li><a href="index.html" aria-current="page">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="book.html">Book</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="landing_section" class="home">
+        <p class="chelsea tagline">craft your way</p>
+        <h1 class="jl_chubby heading">CRAFTS</h1>
+        <p class="ahkio subheading">BY JAME</p>
+
+        <div id="photo_display">
+          <div id="photo_1_container" class="photo_container">
+            <img id="photo_1" src="img/homepage_clickers.png" alt="Clickers">
+          </div>
+          <div id="photo_2_container" class="photo_container">
+            <img id="photo_2" src="img/homepage_booth.png" alt="Booth">
+          </div>
+          <div id="photo_3_container" class="photo_container">
+            <img id="photo_3" src="img/homepage_cordy.png" alt="Cordy">
+          </div>
+        </div>
+
+        <a class="book_button" href="book.html">Book now!</a>
+
+        <!-- Decorative flowers: empty alt so screen readers skip them -->
+        <img class="flower flower_1" src="img/flower_pink.png" alt="" aria-hidden="true">
+      </section>
+
+      <section id="reel_section" class="home">
+        <h2 class="koulen">
+          <span class="heading1">THE CRAFTING</span>
+          <span class="heading2">EXPERIENCE</span>
+        </h2>
+
+        <!-- The grey box in your design. Swap for a <video> or a thumbnail image -->
+        <div id="reel_display">
+          <img src="img/reel_thumbnail.png" alt="Preview of our crafting reel">
+          <!-- or: <video src="img/reel.mp4" controls muted playsinline></video> -->
+        </div>
+
+        <a class="reel_button" href="https://www.instagram.com/craftsbyjame_/" target="_blank" rel="noopener noreferrer">
+          <img src="img/instagram_icon.svg" alt="">Instagram
+        </a>
+
+        <img class="flower flower_2" src="img/flower_pink.png" alt="" aria-hidden="true">
+        <img class="flower flower_3" src="img/flower_maroon.png" alt="" aria-hidden="true">
+      </section>
+
+      <section id="popup_section" class="home">
+        <h2 class="koulen">
+          <span class="heading1">UPCOMING</span>
+          <span class="heading2">POP-UPS</span>
+        </h2>
+
+        <a class="popup_button" href="https://www.instagram.com/craftsbyjame_/" target="_blank" rel="noopener noreferrer">Click Here</a>
+
+        <div id="popup_display">
+          <img id="popup_1" src="img/pop_up_1.png" alt="Pop up 1">
+          <img id="popup_2" src="img/pop_up_2.png" alt="Pop up 2">
+        </div>
+
+        <img class="flower flower_4" src="img/flower_maroon.png" alt="" aria-hidden="true">
+        <img class="flower flower_5" src="img/flower_maroon.png" alt="" aria-hidden="true">
+      </section>
+    </main>
+
+    <footer>
+      <p>FOLLOW US OUT THERE</p>
+      <div id="socials">
+        <a href="https://l.instagram.com/?u=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1hfjC8iZJB%2F%3Fmibextid%3DwwXIfr%26utm_source%3Dig%26utm_medium%3Dsocial%26utm_content%3Dlink_in_bio&e=AUCQIAP64lQqM_lVX4j5C6bkN1sr5FkUZqqhxcIa7HISJCRMqizkItvLXdOyJtxdk3TzlihBDzHvTtTjVTxsHgUup_4H08R-4UPWXWNkDh7cffEGTd5aubzJmv0h0WjF61WEDGA" aria-label="Facebook"><img src="img/facebook_icon.svg" alt=""></a>
+        <a href="https://www.instagram.com/craftsbyjame_?utm_source=ig_web_button_share_sheet&srtk=ZDNlZDc0MzIxNw==" aria-label="Instagram"><img src="img/instagram_icon.svg" alt=""></a>
+      </div>
+      <p>&copy; 2025 Crafts by Jame | All Rights Reserved</p>
+    </footer>
+  </body>
+</html>

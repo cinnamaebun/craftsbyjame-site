@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Crafts by Jame</title>
+
+    <link href="styles.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/logo.png">
+
+    <script src="script.js" defer></script>
+  </head>
+
+  <body>
+    <header id="site_header">
+      <a id="logo" href="index.html"><img src="img/logo.png" alt="Crafts by Jame Logo"></a>
+
+      <button id="menu_open" class="menu_toggle" type="button"
+              aria-label="Open menu" aria-controls="site_nav" aria-expanded="false">
+        <img src="img/hamburger.svg" alt="">
+      </button>
+
+      <nav id="site_nav" aria-label="Main menu">
+        <button id="menu_close" class="menu_toggle" type="button" aria-label="Close menu">
+          <img src="img/close.svg" alt="">
+        </button>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="book.html">Book</a></li>
+          <li><a href="contact.html" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="contact_section" class="contact">
+        <h1 class="koulen">
+          <span class="contact_heading1">OFFICIAL</span>
+          <span class="contact_heading2">CONTACTS</span>
+        </h1>
+        <p class="chelsea contact_description">For more inquiries reach out on our official contacts</p>
+
+        <div id="contact_buttons">
+          <a class="facebook_button" href="#" target="_blank" rel="noopener">
+            <img src="img/facebook_icon.svg" alt="">Crafts by Jame
+          </a>
+          <a class="instagram_button" href="#" target="_blank" rel="noopener">
+            <img src="img/instagram_icon.svg" alt="">craftsbyjame_
+          </a>
+          <!-- href number must match the number shown (international format, no spaces) -->
+          <a class="telephone_button" href="tel:+639762343432">
+            <img src="img/phone_icon.svg" alt="">0976 234 3432
+          </a>
+        </div>
+
+        <img class="flower flower_1" src="img/flower_maroon.png" alt="" aria-hidden="true">
+        <img class="flower flower_2" src="img/flower_maroon.png" alt="" aria-hidden="true">
+      </section>
+
+      <section id="calendar_section" class="contact">
+        <h2 class="koulen calendar_heading">CALENDAR OF EVENTS</h2>
+
+        <!-- script.js fills this from the owner's Google Sheet.
+             Paste the published CSV link into data-sheet-url. -->
+        <div id="events" data-sheet-url="PASTE_PUBLISHED_CSV_LINK_HERE" aria-live="polite">
+          <p class="events_message">Loading events...</p>
+          <noscript><p class="events_message">Please turn on JavaScript to see upcoming events, or check our Facebook and Instagram.</p></noscript>
+        </div>
+
+        <img class="flower flower_3" src="img/flower_maroon.png" alt="" aria-hidden="true">
+        <img class="flower flower_4" src="img/flower_pink.png" alt="" aria-hidden="true">
+        <img class="flower flower_5" src="img/flower_pink.png" alt="" aria-hidden="true">
+        <img class="flower flower_6" src="img/flower_pink.png" alt="" aria-hidden="true">
+      </section>
+    </main>
+
+    <footer>
+      <p>FOLLOW US OUT THERE</p>
+      <div id="socials">
+        <a href="#" aria-label="Facebook"><img src="img/facebook_icon.svg" alt=""></a>
+        <a href="#" aria-label="Instagram"><img src="img/instagram_icon.svg" alt=""></a>
+      </div>
+      <p>&copy; 2025 Crafts by Jame | All Rights Reserved</p>
+    </footer>
+  </body>
+
+</html>

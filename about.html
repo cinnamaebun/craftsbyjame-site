@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Crafts by Jame</title>
+
+    <link href="styles.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/logo.png">
+
+    <script src="script.js" defer></script>
+  </head>
+
+  <body>
+    <header id="site_header">
+      <a id="logo" href="index.html"><img src="img/logo.png" alt="Crafts by Jame Logo"></a>
+
+      <button id="menu_open" class="menu_toggle" type="button"
+              aria-label="Open menu" aria-controls="site_nav" aria-expanded="false">
+        <img src="img/hamburger.svg" alt="">
+      </button>
+
+      <nav id="site_nav" aria-label="Main menu">
+        <button id="menu_close" class="menu_toggle" type="button" aria-label="Close menu">
+          <img src="img/close.svg" alt="">
+        </button>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html" aria-current="page">About</a></li>
+          <li><a href="book.html">Book</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="about_section" class="about">
+        <h1 class="koulen about_heading">ABOUT US</h1>
+        <p class="chelsea about_description">From a side hobby to a full-time craft. It only took one message to change everything and we haven't looked back since.</p>
+        <img id="about_photo" src="img/about_photo.png" alt="Booth with owner">
+
+        <!-- Decorative flower on the left edge, top of page -->
+        <img class="flower flower_1" src="img/flower_pink.png" alt="" aria-hidden="true">
+      </section>
+
+      <section id="products_section" class="about">
+        <h2 class="products_heading">PRODUCTS</h2>
+
+        <article class="product product_1">
+          <img src="img/leather.png" alt="Leather product" loading="lazy">
+          <div class="product_info">
+            <h3 class="product_showcase">LEATHER</h3>
+            <!-- Description still to be written (the grey bars in your design) -->
+            <p class="chelsea product_description">Description coming soon</p>
+          </div>
+        </article>
+
+        <article class="product product_2">
+          <img src="img/loopsy.png" alt="Loopsy product" loading="lazy">
+          <div class="product_info">
+            <h3 class="product_showcase">LOOPSY</h3>
+            <p class="chelsea product_description">Unli LETTER beads and unli SPACERS!</p>
+          </div>
+        </article>
+
+        <article class="product product_3">
+          <img src="img/clicky.png" alt="Clicky product" loading="lazy">
+          <div class="product_info">
+            <h3 class="product_showcase">CLICKY</h3>
+            <p class="chelsea product_description">Clickers with paracord</p>
+          </div>
+        </article>
+
+        <article class="product product_4">
+          <img src="img/cordy.png" alt="Cordy product" loading="lazy">
+          <div class="product_info">
+            <h3 class="product_showcase">CORDY</h3>
+            <p class="chelsea product_description">4-5 CHUNKY letters + 2 charms</p>
+          </div>
+        </article>
+
+        <!-- Decorative maroon flowers: left of the heading, right beside Clicky -->
+        <img class="flower flower_2" src="img/flower_maroon.png" alt="" aria-hidden="true">
+        <img class="flower flower_3" src="img/flower_maroon.png" alt="" aria-hidden="true">
+      </section>
+    </main>
+
+    <footer>
+      <p>FOLLOW US OUT THERE</p>
+      <div id="socials">
+        <a href="#" aria-label="Facebook"><img src="img/facebook_icon.svg" alt=""></a>
+        <a href="#" aria-label="Instagram"><img src="img/instagram_icon.svg" alt=""></a>
+      </div>
+      <p>&copy; 2025 Crafts by Jame | All Rights Reserved</p>
+    </footer>
+  </body>
+
+</html>

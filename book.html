@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book | Crafts by Jame</title>
+
+    <link href="styles.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/logo.png">
+
+    <script src="script.js" defer></script>
+  </head>
+
+  <body>
+    <header id="site_header">
+      <a id="logo" href="index.html"><img src="img/logo.png" alt="Crafts by Jame Logo"></a>
+
+      <button id="menu_open" class="menu_toggle" type="button"
+              aria-label="Open menu" aria-controls="site_nav" aria-expanded="false">
+        <img src="img/hamburger.svg" alt="">
+      </button>
+
+      <nav id="site_nav" aria-label="Main menu">
+        <button id="menu_close" class="menu_toggle" type="button" aria-label="Close menu">
+          <img src="img/close.svg" alt="">
+        </button>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="book.html" aria-current="page">Book</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Intro: two tilted photos + heading -->
+      <section id="book_section" class="book">
+        <div id="book_photos">
+          <img id="book_1" src="#" alt="Book Photo 1">
+          <img id="book_2" src="#" alt="Book Photo 2">
+        </div>
+
+        <div id="book_text">
+          <h1 class="koulen">
+            <span class="book_heading1">BOOK</span>
+            <span class="book_heading2">NOW</span>
+          </h1>
+          <p class="chelsea book_description">Let your guests craft their way, have us at your special event!</p>
+        </div>
+
+        <img class="flower flower_1" src="img/flower_maroon.png" alt="" aria-hidden="true">
+      </section>
+
+      <!-- Packages: one <article> card per package, same pattern each time -->
+      <section id="package_section" class="book">
+        <h2 class="package_heading">PACKAGE</h2>
+        <p class="package_start">STARTS AT PHP 7,499</p>
+
+        <article class="package_card" id="package_a">
+          <h3>PREMIUM PACKAGE A</h3>
+          <ul class="package_inclusions">
+            <li>Cordy Rope</li>
+            <li>Max 4 Chunky Letters</li>
+            <li>Max 6 Basic Spacers</li>
+            <li>1 Pendant or Premium 3D</li>
+          </ul>
+          <div class="package_prices">
+            <p class="price_tag"><strong>&#8369;9,450</strong> 50 pax <small>&#8369;189 each</small></p>
+            <p class="price_tag"><strong>&#8369;18,000</strong> 100 pax <small>&#8369;180 each</small></p>
+          </div>
+        </article>
+
+        <article class="package_card" id="package_b">
+          <h3>PREMIUM PACKAGE B</h3>
+          <ul class="package_inclusions">
+            <li>Cordy Rope</li>
+            <li>Max 7 Chunky Letters</li>
+            <li>Max 2 Premium Charms or Basic Spacers</li>
+            <li>1 Pendant or Premium 3D</li>
+          </ul>
+          <div class="package_prices">
+            <p class="price_tag"><strong>&#8369;11,950</strong> 50 pax <small>&#8369;239 each</small></p>
+            <p class="price_tag"><strong>&#8369;19,900</strong> 100 pax <small>&#8369;199 each</small></p>
+          </div>
+        </article>
+
+        <article class="package_card" id="package_c">
+          <h3>PREMIUM PACKAGE C</h3>
+          <ul class="package_inclusions">
+            <li>Loop Wire</li>
+            <li>UNLI Letter Beads</li>
+            <li>4 Spacers (Basic + Premium)</li>
+            <li>1 Premium 3D</li>
+          </ul>
+          <div class="package_prices">
+            <p class="price_tag"><strong>&#8369;9,000</strong> minimum 40 pax <small>&#8369;225 each</small></p>
+          </div>
+        </article>
+
+        <img class="flower flower_2" src="img/flower_maroon.png" alt="" aria-hidden="true">
+        <img class="flower flower_3" src="img/flower_maroon.png" alt="" aria-hidden="true">
+      </section>
+
+      <!-- Booking form -->
+      <section id="form_section" class="book">
+        <h2 class="koulen form_heading">HAVE US AT YOUR EVENT!</h2>
+
+        <!-- action is empty for now; a form service or backend gets connected later -->
+        <form id="booking_form" action="#" method="post">
+          <label for="name">Your name</label>
+          <input type="text" name="name" id="name" placeholder="Enter your name" autocomplete="name" required>
+
+          <label for="number">Contact number</label>
+          <input type="tel" name="number" id="number" placeholder="Enter your phone number" autocomplete="tel" required>
+
+          <label for="social">Facebook/IG link</label>
+          <input type="url" name="social" id="social" placeholder="https://www.instagram.com/craftsbyjame" required>
+
+          <label for="rate_type">Choose booking</label>
+          <select name="rate_type" id="rate_type" required>
+            <option value="" disabled selected>SELECT PREFERRED RATE</option>
+            <optgroup label="Premium Package A">
+              <option value="package_a_50">Premium Package A (50 pax)</option>
+              <option value="package_a_100">Premium Package A (100 pax)</option>
+            </optgroup>
+            <optgroup label="Premium Package B">
+              <option value="package_b_50">Premium Package B (50 pax)</option>
+              <option value="package_b_100">Premium Package B (100 pax)</option>
+            </optgroup>
+            <optgroup label="Premium Package C">
+              <option value="package_c_40">Premium Package C (min. 40 pax)</option>
+            </optgroup>
+          </select>
+
+          <!-- Native date picker: pure HTML, opens a calendar on tap/click -->
+          <label for="event_date">Day of event</label>
+          <input type="date" name="event_date" id="event_date" required>
+
+          <button type="submit" id="book_submit">Submit</button>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>FOLLOW US OUT THERE</p>
+      <div id="socials">
+        <a href="#" aria-label="Facebook"><img src="img/facebook_icon.svg" alt=""></a>
+        <a href="#" aria-label="Instagram"><img src="img/instagram_icon.svg" alt=""></a>
+      </div>
+      <p>&copy; 2025 Crafts by Jame | All Rights Reserved</p>
+    </footer>
+  </body>
+
+</html>
