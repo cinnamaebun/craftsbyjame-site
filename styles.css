@@ -1,3 +1,5 @@
+/* Google Fonts for Chelsea Market, Koulen and Bellota Text (the HTML doesn't link them) */
+@import url('https://fonts.googleapis.com/css2?family=Bellota+Text:wght@400;700&family=Chelsea+Market&family=Koulen&display=swap');
 
 @font-face {
   font-family: 'JI Chubby Caps';
@@ -11,6 +13,20 @@
   src: url('fonts/Ahkio-W00-Light.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+}
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  --pink_light: #FDDEE3;
+  --pink: #FEB0BD;
+  --maroon: #73131F;
+  --white: #FFFFFF;
+  --black: #000000;
+  --paper: #F7F3F0;          /* fallback color while the paper image loads */
+  --paper_img: url('img/paper_bg.jpg');
+  --photo_shadow: 6px 5px 2px #0003;
 }
 
 .chelsea-market-regular {
@@ -32,14 +48,104 @@
 
 a {
   text-decoration: none;
-
 }
 
 /*PHONE VIEWPORT/BASE STYLES*/
 
 /*BODY STYLES*/
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;          /* stops flowers that bleed off the edge from widening the page on phones (body alone isn't enough) */
+}
+
+body {
+  font-synthesis: none;
+  font-family: "Chelsea Market", system-ui;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--maroon);
+  background: var(--paper_img) top center / 100% auto repeat-y, var(--paper);
+  overflow-x: hidden;          /* flowers bleed off the screen edge */
+}
+
+/* Decorations (flowers, the pink pop-up dome) deliberately stick out past the screen edges. Clip them at <main>
+   so they can't make the page wider than the phone; that is what stretched the fixed menu bar. Only the
+   horizontal axis is clipped, so flowers can still overlap sections above and below. */
+main {
+  overflow-x: clip;
+}
+
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--black);
+  outline-offset: 3px;
+}
+
 .flower {
   position: absolute;
+
+  pointer-events: none;
+}
+
+/* About page only: pink glow in the top-left and bottom-right corners, plain paper everywhere else.
+   Two radial gradients, one centered on each corner. The numbers in "ellipse 140% 48%" are the glow's
+   width (as % of page width) and height (as % of page height). The extra stops make the fade long and
+   gradual; the 0.95 on the first stop is how strong the pink is at the corner. */
+body:has(#about_section) {
+  background:
+    radial-gradient(ellipse 90% 40% at 0% 0%,
+      rgba(254, 176, 189, 0.95) 0%,
+      rgba(254, 176, 189, 0.75) 10%,
+      rgba(254, 176, 189, 0.50) 25%,
+      rgba(254, 176, 189, 0.28) 60%,
+      rgba(254, 176, 189, 0.10) 80%,
+      rgba(254, 176, 189, 0) 100%) center / 100% 100% no-repeat,
+    radial-gradient(ellipse 140% 36% at 100% 100%,
+      rgba(254, 176, 189, 0.95) 0%,
+      rgba(254, 176, 189, 0.75) 10%,
+      rgba(254, 176, 189, 0.50) 25%,
+      rgba(254, 176, 189, 0.28) 60%,
+      rgba(254, 176, 189, 0.10) 80%,
+      rgba(254, 176, 189, 0) 100%) center / 100% 100% no-repeat,
+    var(--paper_img) top center / 100% auto repeat-y,
+    var(--paper);
+}
+
+/* Book page only: same two-corner pink glow idea as About, but the top-left glow is stronger and fades out
+   slowly over ~1100px (a 300px x 1100px ellipse), because this page is much taller. The first number in each
+   rgba is how strong the pink is at that distance from the corner. */
+body:has(#book_section) {
+  background:
+    radial-gradient(ellipse 300px 1100px at 0% 0%,
+      rgba(254, 176, 189, 0.60) 0%,
+      rgba(254, 176, 189, 0.55) 14%,
+      rgba(254, 176, 189, 0.47) 36%,
+      rgba(254, 176, 189, 0.40) 50%,
+      rgba(254, 176, 189, 0.28) 64%,
+      rgba(254, 176, 189, 0.15) 82%,
+      rgba(254, 176, 189, 0) 100%) top left / 100% 100% no-repeat,
+    radial-gradient(ellipse 140% 36% at 100% 100%,
+      rgba(254, 176, 189, 0.95) 0%,
+      rgba(254, 176, 189, 0.75) 10%,
+      rgba(254, 176, 189, 0.50) 25%,
+      rgba(254, 176, 189, 0.28) 60%,
+      rgba(254, 176, 189, 0.10) 80%,
+      rgba(254, 176, 189, 0) 100%) center / 100% 100% no-repeat,
+    var(--paper_img) top center / 100% auto repeat-y,
+    var(--paper);
+}
+
+/* Contact page only: soft pink glow from the top-left corner, fading into the plain paper */
+body:has(#contact_section) {
+  background:
+    radial-gradient(ellipse 160% 440px at 0% 0%,
+      rgba(254, 176, 189, 0.55) 0%,
+      rgba(254, 176, 189, 0.35) 25%,
+      rgba(254, 176, 189, 0.15) 55%,
+      rgba(254, 176, 189, 0) 100%) center / 100% 100% no-repeat,
+    var(--paper_img) top center / 100% auto repeat-y,
+    var(--paper);
 }
 
 #logo img {
@@ -53,37 +159,205 @@ a {
 
 .koulen {
   font-family: "Koulen", sans-serif;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 0.72;           /* tight stacked caps, as in the design */
+  color: var(--maroon);
+}
+
+/* Line 1 and line 2 use different sizes so both lines are the same width (aligned on both sides) */
+.koulen .heading1,
+.koulen .heading2 {
+  display: block;
+}
+
+.koulen .heading1 {
+  font-size: 46px;
+  line-height: 0.8;
+}
+
+.koulen .heading2 {
+  font-size: 40px;
+  line-height: 0.78;
+}
+
+#reel_section .koulen .heading2 {
+  font-size: 52px;             /* "EXPERIENCE" is shorter than "THE CRAFTING", so it needs to be larger */
 }
 
 .jl_chubby {
   font-family: 'JI Chubby Caps', sans-serif;
+  font-weight: normal;
+  font-size: 47px;
+  line-height: 1;
+  letter-spacing: -0.08em;     /* tighter kerning, as in the design */
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
 }
 
 .ahkio {
   font-family: 'Ahkio-W00-Light', sans-serif;
 }
+
+/* Shared pill buttons */
+.book_button,
+.reel_button,
+.popup_button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 999px;
+  font-family: "Chelsea Market", system-ui;
+  line-height: 1.2;
+}
+
 /*HEADER STYLES*/
+#site_header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 24px 32px 0 30px;   /* right padding sets the hamburger's right margin (was 22px) */
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  z-index: 100;
+}
+
+.menu_toggle {
+  background: none;
+  border: 0;
+  padding: 6px;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.menu_toggle img {
+  width: 36px;
+  height: 36px;
+  display: block;
+}
 
 /*NAVIGATION STYLES*/
+/* White bar that drops down from the top when .is_open is added: X on the right, links in one row */
+#site_nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+  padding: 25px 40px 26px;
+  background: var(--white);
+  box-shadow: 0 6px 18px #0003;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 200;
+  transform: translateY(-110%);
+  visibility: hidden;
+  transition: transform 0.3s ease, visibility 0s linear 0.3s;
+}
 
-/*FOOTER STYLES*/
+#site_nav.is_open {
+  transform: translateY(0);
+  visibility: visible;
+  transition: transform 0.3s ease;
+}
+
+#menu_close {
+  margin-right: -8px;           /* lines the X up with the hamburger icon: header right padding (32px) minus nav right padding (40px) */
+}
+
+#menu_close img {
+  width: 33px;
+  height: 33px;
+}
+
+/* The X is focused by script.js when the menu opens; keep a neat, subtle ring for keyboard users only */
+#menu_close:focus-visible {
+  outline: 2px solid var(--pink);
+  outline-offset: 0;
+  border-radius: 8px;
+}
+
+#site_nav ul {
+  list-style: none;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+#site_nav a {
+  font-family: "Chelsea Market", system-ui;
+  font-size: 16px;
+  color: var(--black);
+}
+
+#site_nav a[aria-current="page"] {
+  color: var(--pink);
+}
+
+/* The About and Contact page headers sit on a light background, so the hamburger icon is forced to black there */
+body:has(#about_section) #menu_open img,
+body:has(#book_section) #menu_open img,
+body:has(#contact_section) #menu_open img {
+  filter: brightness(0);
+}
+
+/* The Home header sits on the maroon top, so the hamburger icon is forced to white there
+   (brightness(0) turns any icon black, then invert(1) flips it to white) */
+body:has(#landing_section) #menu_open img {
+  filter: brightness(0) invert(1);
+}
 
 /*HOMEPAGE STYLES*/
 /*HOME LANDING SECTION STYLES*/
+/* Maroon top (ends 263px down), paper below; the photos straddle the edge */
+#landing_section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding-top: 124px;
+  background: linear-gradient(var(--maroon) 0 263px, transparent 263px);
+  text-align: center;
+}
+
+.tagline {
+  font-size: 12px;
+  color: var(--white);
+}
+
+.heading {
+  color: var(--white);
+}
+
+.subheading {
+  margin-top: -6px;
+  font-size: 16px;
+  line-height: 1.2;
+  color: var(--white);
+}
 
 #photo_display {
   position: relative;
   width: 100%;
   max-width: 380px;
   height: 250px;
-  margin: 0 auto;
+  margin: 5px auto 0;
 }
 
 .photo_container {
   position: absolute;
-  padding: 5px;
+  padding: 4px;
   background: white;
-  box-shadow: 0 3px 7px #0003;
+  box-shadow: var(--photo_shadow);
   box-sizing: border-box;
 }
 
@@ -95,27 +369,15 @@ a {
   object-position: center;
 }
 
-/* Left photo */
-#photo_1_container {
-  width: 39%;
-  height: 72%;
-  right: 9%;
-  top: 7%;
-  transform: rotate(4deg);
+#reel_display video {
+  width: 222px;
+  height: 375px;
+  width: auto;
   z-index: 1;
 }
 
-/* Center photo */
-#photo_2_container {
-  width: 39%;
-  height: 76%;
-  left: 30.5%;
-  top: 14%;
-  z-index: 2;
-}
-
-/* Right photo */
-#photo_3_container {
+/* Left photo (Clickers) */
+#photo_1_container {
   width: 39%;
   height: 72%;
   left: 9%;
@@ -124,3 +386,946 @@ a {
   z-index: 1;
 }
 
+/* Center photo (Booth) */
+#photo_2_container {
+  width: 39%;
+  height: 76%;
+  left: 30.5%;
+  top: 14%;
+  z-index: 2;
+}
+
+/* Right photo (Cordy) */
+#photo_3_container {
+  width: 39%;
+  height: 72%;
+  right: 9%;
+  top: 7%;
+  transform: rotate(4deg);
+  z-index: 1;
+}
+
+#photo_1 { object-position: 50% 55%; }
+#photo_2 { object-position: 65% 40%; }
+#photo_3 { object-position: 40% 50%; }
+
+/* Overlaps the bottom of the center photo */
+.book_button {
+  position: relative;
+  z-index: 5;
+  margin-top: -40px;
+  padding: 6px 18px;
+  background: var(--pink);
+  color: var(--white);
+  font-size: 16px;
+}
+
+.flower_1 {
+  width: 100px;
+  right: -23px;
+  top: 345px;
+}
+
+/*REEL SECTION STYLES*/
+/* Visual order: heading, Instagram button, video (the HTML has the video before the button) */
+#reel_section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 62px 20px 30px;
+  text-align: center;
+}
+
+#reel_section h2 { order: 1; }
+.reel_button { order: 2; }
+#reel_display { order: 3; }
+
+.reel_button {
+  margin-top: 1px;
+  padding: 8px 16px;
+  background: var(--maroon);
+  color: var(--white);
+  font-size: 10px;
+}
+
+.reel_button img {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+#reel_display {
+  display: flex;
+  justify-content: center;
+  margin-top: 14px;
+}
+
+#reel_display video {
+  display: block;
+  aspect-ratio: 9 / 16;
+  max-width: 100%;
+  background: #D9D9D9;
+}
+
+.flower_2 {
+  width: 120px;
+  left: -20px;
+  top: 258px;
+
+}
+
+.flower_3 {
+  width: 70px;
+  right: 48px;
+  top: 505px;
+  
+}
+
+/*POP-UP SECTION STYLES*/
+/* Heading and button share the first row. The dome is a 546px-wide circle (wider than the screen),
+   centered behind the section, so the top edge curves gently and runs off the sides. */
+#popup_section {
+  position: relative;
+  display: grid;
+  grid-template-columns: 150px 100px;
+  justify-content: center;
+  align-items: center;
+  column-gap: -20px;
+  box-sizing: border-box;
+  padding: 75px 20px 28px;
+}
+
+#popup_section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: -1px;
+  left: 60%;
+  width:700px;
+  height: 457.62;
+  margin-left: -390px;
+  background: var(--pink);
+  border-radius: 345px 345px 0 0;
+  z-index: 0;
+}
+
+#popup_section > *:not(.flower) {
+  position: relative;
+  z-index: 1;
+}
+
+#popup_section .koulen {
+  grid-column: 1;
+  color: var(--white);
+}
+
+.popup_button {
+  grid-column: 2;
+  padding: 9px 6px;
+  background: var(--maroon);
+  color: var(--white);
+  font-size: 10px;
+}
+
+#popup_display {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+#popup_display img {
+  display: block;
+  width: 152px;
+  height: 215px;
+  aspect-ratio: 2 / 3;
+  box-sizing: border-box;
+  padding: 4px;
+  background: var(--white);
+  box-shadow: var(--photo_shadow);
+  object-fit: cover;
+  object-position: center;
+}
+
+#popup_1 {
+  margin-top: 16px;
+  transform: rotate(4deg);
+}
+
+#popup_2 {
+  transform: rotate(-5deg);
+}
+
+.flower_4 {
+  width: 59.72px;
+  left: -20px;
+  bottom: -58px;
+  transform: rotate(30deg);
+
+}
+
+.flower_5 {
+  width: 70px;
+  right: -27px;
+  top: 92px;
+  transform: rotate(34deg);
+
+}
+
+/*ABOUT PAGE STYLES*/
+/* Intro: text stacked above the photo (the gradient lives on the body, see top of file) */
+#about_section {
+  position: relative;
+  box-sizing: border-box;
+  padding: 100px 20px 28px;
+  text-align: center;
+}
+
+.about_heading {
+  color: var(--maroon);
+}
+
+.about_description, .about_description2 {
+  max-width: 240px;
+  margin: 12px auto 0;
+  font-size: 12px;
+  line-height: 1;
+  color: var(--black);
+}
+
+.about_description2 {
+  max-width: 250px;
+  margin-top: -1px;
+}
+
+#about_photo {
+  display: block;
+  width: min(100%, 273px);
+  aspect-ratio: 3 / 2;
+  height: 227px;
+  margin: 15px auto 0;
+  box-sizing: border-box;
+  padding: 4px;
+  background: var(--white);
+  box-shadow: var(--photo_shadow);
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Products: outlined chubby heading, then one row per product (tilted photo left, text right) */
+#products_section {
+  position: relative;
+  box-sizing: border-box;
+  padding: 44px 0 70px;
+}
+
+.products_heading {
+  font-family: 'JI Chubby Caps', sans-serif;
+  font-weight: normal;
+  font-size: 34px;
+  text-align: center;
+  margin-top: -35px;
+  color: var(--pink_light);
+  -webkit-text-stroke: 5px var(--maroon);
+  paint-order: stroke fill;    /* keeps the stroke outside the letters so the pink fill stays full size */
+  text-shadow: 0 8px 8px #0003;
+}
+
+.product {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 15px;
+}
+
+.products_heading + .product {
+  margin-top: 12px;
+}
+
+.product img {
+  position: relative;
+  z-index: 2;                  /* photos sit above the flowers */
+  flex: none;
+  display: block;
+  width: 151px;
+  height: 146px;
+  box-sizing: border-box;
+  padding: 4px;
+  background: var(--white);
+  box-shadow: var(--photo_shadow);
+  object-fit: cover;
+  object-position: center;
+  transform: rotate(9deg);
+}
+
+.product_info {
+  flex: none;
+  width: 110px;
+  text-align: left;
+}
+
+.product_showcase {
+  display: inline-block;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--maroon);
+}
+
+.product_description {
+  margin-top: -2px;
+  font-size: 10px;
+  line-height: 1;
+  color: var(--black);
+}
+
+/* About flowers (rotation values are eyeballed from the design; tweak the degrees as needed) */
+/* Left of the PRODUCTS heading */
+#products_section .flower_2 {
+  width: 120px;
+  right: auto;
+  left: -55px;
+  top: 10px;
+  transform: rotate(15deg);
+  z-index: 3;
+}
+
+/* Right, beside Clicky and Cordy */
+#products_section .flower_3 {
+  width: 120px;
+  left: auto;
+  right: -32px;
+  top: 458px;
+  transform: rotate(-2deg);
+  z-index: 1;
+}
+
+/*BOOK PAGE STYLES*/
+/* The phone layout is a 375px-wide column (the pink glow lives on the body, same as the About page).
+   Sizes and positions below were measured from the design at 375px. */
+
+/* Intro: two tilted photos on the left, heading + description on the right */
+#book_section {
+  position: relative;
+  box-sizing: border-box;
+  max-width: 375px;
+  height: 326px;               /* the PACKAGE heading starts right under this */
+  margin: 0 auto;
+}
+
+#book_photos img {
+  position: absolute;
+  width: 122px;
+  height: 153px;
+  box-sizing: border-box;
+  padding: 4px;
+  background: var(--white);
+  box-shadow: var(--photo_shadow);
+  object-fit: cover;
+  object-position: center;
+}
+
+#book_1 {
+  left: 42px;
+  top: 97px;
+  transform: rotate(-1deg);
+  z-index: 1;
+}
+
+#book_2 {
+  left: 98px;
+  top: 134px;
+  transform: rotate(5deg);
+  z-index: 2;                  /* sits in front of the first photo */
+}
+
+#book_text {
+  position: absolute;
+  top: 116px;
+  right: 35px;
+  width: 100px;
+}
+
+/* BOOK and NOW use different sizes so both lines end up the same width, as on the Home page */
+#book_text .koulen span {
+  display: block;
+}
+
+.book_heading1 {
+  font-size: 46px;
+}
+
+.book_heading2 {
+  font-size: 55px;
+  margin-top: 3px;
+}
+
+.book_description {
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 13px;
+  color: var(--black);
+}
+
+/* Hero flower (rotation is eyeballed from the design; tweak the degrees as needed). Every property is set
+   because the Home page has a global .flower_1 rule. */
+#book_section .flower_1 {
+  width: 95px;
+  left: -35px;
+  right: auto;
+  top: 258px;
+  bottom: auto;
+  transform: rotate(55deg);
+}
+
+/* Packages: heading, "starts at" line, then one card per package */
+#package_section {
+  position: relative;
+  box-sizing: border-box;
+  max-width: 375px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.package_heading {
+  font-family: 'JI Chubby Caps', sans-serif;
+  font-weight: normal;
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  color: var(--pink_light);
+  -webkit-text-stroke: 5px var(--maroon);
+  paint-order: stroke fill;    /* keeps the stroke outside the letters so the pink fill stays full size */
+  text-shadow: 0 5px 5px #0003;
+}
+
+.package_start {
+  font-size: 24px;
+  line-height: 1;
+  margin-top: 2px;
+  color: var(--maroon);
+}
+
+/* The <article> is just a wrapper: the visible card is the maroon title + the pink list, and the
+   price tags sit below it. Cards are above the flowers so flowers tuck behind them. */
+.package_card {
+  position: relative;
+  z-index: 4;
+  width: 244px;
+  margin: 12px auto 0;
+}
+
+.package_card + .package_card {
+  margin-top: 35px;
+}
+
+.package_card h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 95px;
+  padding: 40px 30px 25px 30px;             /* narrow enough that "PREMIUM PACKAGE A" breaks onto two lines */
+  border-radius: 25px 25px 0 0;
+  background: var(--maroon);
+  font-family: 'JI Chubby Caps', sans-serif;
+  font-weight: normal;
+  font-size: 23px;
+  line-height: 21px;
+  color: var(--white);
+  text-align: center;
+}
+
+.package_inclusions {
+  list-style: none;
+  overflow: hidden;
+  border: 1px solid var(--maroon);
+  border-top: 0;
+  border-radius: 0 0 18px 18px;
+  background: var(--pink_light);
+}
+
+.package_inclusions li {
+  padding: 9.5px 10px;
+  font-size: 16px;
+  line-height: 18.5px;
+  color: var(--black);
+}
+
+.package_inclusions li + li {
+  border-top: 1px solid #0000004d;   /* thin grey divider between rows */
+}
+
+.package_prices {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.price_tag {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 93px;
+  padding: 20px 10px;
+  border-radius: 14px;
+  background: var(--maroon);
+  font-size: 15px;
+  line-height: 19px;
+  color: var(--white);
+}
+
+.price_tag span {
+  font-size: 20px;
+  line-height: 19px;
+}
+
+.price_tag small {
+  font-size: 10px;
+  line-height: 14px;
+}
+
+/* A package with only one price (Package C) gets a wider, slightly tighter tag */
+.price_tag:only-child {
+  width: 180px;
+  padding: 14.5px 8px;
+  line-height: 14.5px;
+}
+
+.price_tag:only-child small {
+  line-height: 12px;
+}
+
+/* Package flowers (rotations are eyeballed from the design; tweak the degrees as needed).
+   Every property is set because the Home page has global .flower_2 to .flower_5 rules. */
+/* Right of Package B, tucked behind the card */
+#package_section .flower_2 {
+  width: 125px;
+  left: auto;
+  right: -47px;
+  top: 522px;
+  bottom: auto;
+  transform: rotate(0deg);
+}
+
+/* Left of Package B, mostly off the screen edge */
+#package_section .flower_3 {
+  width: 110px;
+  left: -94px;
+  right: auto;
+  top: 586px;
+  bottom: auto;
+  transform: rotate(0deg);
+}
+
+/* Left of Package C, tucked behind the card */
+#package_section .flower_4 {
+  width: 92px;
+  left: -22px;
+  right: auto;
+  top: 883px;
+  bottom: auto;
+  transform: rotate(0deg);
+}
+
+/* Small one under it, left edge */
+#package_section .flower_5 {
+  width: 60px;
+  left: -16px;
+  right: auto;
+  top: 1084px;
+  bottom: auto;
+  transform: rotate(0deg);
+}
+
+/* Booking form: heading, then a maroon card with a label + field per row */
+#form_section {
+  box-sizing: border-box;
+  max-width: 375px;
+  margin: 52px auto 0;
+  padding-bottom: 34px;
+  text-align: center;
+}
+
+.form_heading {
+  font-size: 30px;
+  line-height: 20px;
+  letter-spacing: -0.01em;
+}
+
+#booking_form {
+  box-sizing: border-box;
+  width: calc(100% - 58px);
+  max-width: 317px;
+  margin: 13px auto 0;
+  padding: 18px 31px 19px;
+  border-radius: 28px;
+  background: var(--maroon);
+  text-align: left;
+}
+
+#booking_form label {
+  display: block;
+  margin: 0 0 3px 9px;
+  font-size: 18px;
+  line-height: 22px;
+  color: var(--white);
+}
+
+#booking_form input,
+#booking_form select {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 34px;
+  margin-bottom: 16px;
+  padding: 0 12px;
+  border: 3px solid var(--pink);
+  border-radius: 10px;
+  background: var(--white);
+  font-family: "Chelsea Market", system-ui;
+  font-size: 12px;
+  line-height: 1.2;
+  color: var(--black);
+}
+
+#booking_form ::placeholder {
+  color: #8a8a8a;
+  opacity: 1;
+}
+
+/* Dropdown: custom arrow, grey "SELECT PREFERRED RATE" until a rate is chosen, text centered like the design */
+#booking_form select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0 30px;
+  text-align: center;
+  text-align-last: center;
+  background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a8a8a'/%3E%3C/svg%3E") no-repeat right 12px center;
+}
+
+#booking_form select:invalid {
+  color: #8a8a8a;
+}
+
+#booking_form select option,
+#booking_form select optgroup {
+  color: var(--black);
+}
+
+#booking_form input:focus-visible,
+#booking_form select:focus-visible {
+  outline: 3px solid var(--white);
+  outline-offset: 2px;
+}
+
+#book_submit {
+  display: block;
+  width: 108px;
+  height: 32px;
+  margin: 22px auto 0;
+  border: 3px solid var(--pink);
+  border-radius: 999px;
+  background: var(--white);
+  font-family: "Chelsea Market", system-ui;
+  font-size: 13px;
+  line-height: 1;
+  color: var(--black);
+  cursor: pointer;
+}
+
+/*CONTACT PAGE STYLES*/
+/* Intro: heading, description and the three pill buttons */
+#contact_section {
+  position: relative;
+  box-sizing: border-box;
+  padding: 176px 20px 79px;
+  text-align: center;
+}
+
+#contact_section .koulen span {
+  display: block;
+}
+
+.contact_heading2 {
+  margin-top: 2px;
+}
+
+.contact_description {
+  max-width: 240px;
+  margin: 8px auto 0;
+  font-size: 12px;
+  line-height: 1;
+  color: var(--black);
+}
+
+#contact_buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 7px;
+  margin-top: 10px;
+}
+
+#contact_buttons a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: var(--pink);
+  box-shadow: 0 3px 5px #0003;
+  font-family: "Chelsea Market", system-ui;
+  font-size: 12px;
+  line-height: 1.2;
+  color: var(--white);
+}
+
+#contact_buttons img {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+/* Contact flowers (rotations are eyeballed from the design; tweak the degrees as needed) */
+#contact_section .flower_1 {
+  width: 95px;
+  left: -15px;
+  right: auto;
+  top: 131px;
+  bottom: auto;
+  /* transform: rotate(-2deg); */
+}
+
+#contact_section .flower_2 {
+  width: 40px;
+  left: auto;
+  right: 65px;
+  top: 78px;
+  bottom: auto;
+  /* transform: rotate(8deg); */
+}
+
+/* Calendar: maroon dome (a 948px-wide circle, wider than the screen, so the top curves gently) holding
+   a white card per month. script.js builds the cards from the Google Sheet. */
+#calendar_section {
+  position: relative;
+  box-sizing: border-box;
+  padding: 86px 0 80px;
+  min-height: 300px;           /* smallest dome size when there are no events; grows with the cards */
+  text-align: center;
+}
+
+#calendar_section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 480px;
+  margin-left: -245px;
+  background: var(--maroon);
+  border-radius: 100% 100% 0 0;
+  z-index: 0;
+}
+
+#calendar_section > *:not(.flower) {
+  position: relative;
+  z-index: 1;
+}
+
+.calendar_heading {
+  font-size: 32px;
+  color: var(--white);
+}
+
+#calendar_section > #events {
+  z-index: 2;                  /* card sits above flower_5 */
+  width: 100%;
+  max-width: 297px;
+  margin: 20px auto 0;
+}
+
+.event_month {
+  overflow: hidden;
+  border-radius: 28px;
+  background: var(--white);
+}
+
+.event_month + .event_month {
+  margin-top: 16px;
+}
+
+.month_title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1;
+  background: var(--pink);
+  color: var(--white);
+}
+
+.event_list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px 14px 21px;
+}
+
+.event_item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  box-sizing: border-box;
+  padding: 9px 12px 9px 14px;
+  border-radius: 10px;
+  background: var(--maroon);
+  color: var(--white);
+  text-align: left;
+}
+
+.event_day {
+  flex: none;
+  min-width: 26px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.event_place {
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* Loading / empty / error messages from script.js */
+.events_message {
+  padding: 0 20px;
+  font-size: 12px;
+  line-height: 1.3;
+  color: var(--white);
+}
+
+/* Calendar flowers (rotations are eyeballed from the design; tweak the degrees as needed) */
+/* Maroon, above the dome on the right */
+#calendar_section .flower_3 {
+  width: 60px;
+  left: auto;
+  right: 25px;
+  top: -97px;
+  bottom: auto;
+  transform: rotate(45deg);
+}
+
+/* Small pink, top left inside the dome */
+#calendar_section .flower_4 {
+  width: 38px;
+  left: 31px;
+  right: auto;
+  top: 53px;
+  bottom: auto;
+  transform: rotate(10deg);
+}
+
+/* Pink, bottom left, tucked behind the card */
+#calendar_section .flower_5 {
+  width: 52px;
+  left: 29px;
+  right: auto;
+  top: auto;
+  bottom: 53px;
+  transform: rotate(7deg);
+  z-index: 1;
+}
+
+/* Large pink, bottom right, in front of the card corner */
+#calendar_section .flower_6 {
+  width: 92px;
+  left: auto;
+  right: -10px;
+  top: auto;
+  bottom: -8px;
+  transform: rotate(-35deg);
+  z-index: 3;
+}
+
+/* Contact page only: if the page is shorter than the screen, the maroon dome grows to fill the gap
+   so the footer always sits at the bottom with no bare paper under it. */
+body:has(#contact_section) {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+body:has(#contact_section) main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+body:has(#contact_section) #calendar_section {
+  flex: 1;
+}
+
+/*FOOTER STYLES*/
+footer {
+  box-sizing: border-box;
+  padding: 24px 20px 32px;
+  background: var(--pink);
+  color: var(--white);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Footer text uses Bellota Text via the .bellota class on <footer> */
+.bellota {
+  font-family: "Bellota Text", system-ui, sans-serif;
+}
+
+footer p {
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+#socials {
+  display: flex;
+  gap: 10px;
+}
+
+#socials img {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+/* The Facebook icon is an <img>, so CSS can't change its SVG stroke (that's why the old #fb rule did nothing).
+   Instead, four tiny white drop-shadows (no blur) are stacked around the icon to thicken its lines by ~1px.
+   Raise or lower the 0.45px to make the stroke thicker or thinner. Only the footer's Facebook icon is affected. */
+#socials a[aria-label="Facebook"] img {
+  filter:
+    drop-shadow(0.45px 0 0 var(--white))
+    drop-shadow(-0.45px 0 0 var(--white))
+    drop-shadow(0 0.45px 0 var(--white))
+    drop-shadow(0 -0.45px 0 var(--white));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  #site_nav,
+  #site_nav.is_open { transition: none; }
+}

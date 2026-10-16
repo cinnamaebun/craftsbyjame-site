@@ -5,10 +5,12 @@ const menuOpen = document.getElementById("menu_open");
 const menuClose = document.getElementById("menu_close");
 const siteNav = document.getElementById("site_nav");
 
-function openMenu() {
+function openMenu(event) {
   siteNav.classList.add("is_open");
   menuOpen.setAttribute("aria-expanded", "true");
-  menuClose.focus();
+  // Only move focus to the X for keyboard users (event.detail is 0 for keyboard clicks),
+  // so tapping/clicking doesn't draw a focus box around the X
+  if (!event || event.detail === 0) menuClose.focus();
 }
 
 function closeMenu() {
