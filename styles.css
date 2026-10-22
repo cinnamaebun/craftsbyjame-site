@@ -363,8 +363,8 @@ body:has(#landing_section) #menu_open img {
 
 .photo_container img {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 550x;
+  height: 450px;
   object-fit: cover;
   object-position: center;
 }
@@ -380,7 +380,7 @@ body:has(#landing_section) #menu_open img {
 #photo_1_container {
   width: 39%;
   height: 72%;
-  left: 9%;
+  left: 6%;
   top: 7%;
   transform: rotate(-5deg);
   z-index: 1;
@@ -427,7 +427,7 @@ body:has(#landing_section) #menu_open img {
 }
 
 /*REEL SECTION STYLES*/
-/* Visual order: heading, Instagram button, video (the HTML has the video before the button) */
+/* Visual order: heading, "Watch more on", Instagram button, video (the HTML has the video before them) */
 #reel_section {
   position: relative;
   display: flex;
@@ -439,8 +439,17 @@ body:has(#landing_section) #menu_open img {
 }
 
 #reel_section h2 { order: 1; }
-.reel_button { order: 2; }
-#reel_display { order: 3; }
+.watch_more { order: 2; }
+.reel_button { order: 3; }
+#reel_display { order: 4; }
+
+/* "Watch more on" uses the .ahkio class for its font */
+.watch_more {
+  margin-top: 2px;
+  font-size: 14px;
+  line-height: 1.1;
+  color: var(--maroon);
+}
 
 .reel_button {
   margin-top: 1px;
@@ -481,6 +490,18 @@ body:has(#landing_section) #menu_open img {
   right: 48px;
   top: 505px;
   
+}
+
+/* Reel section stacking: flowers sit on the bottom layer, the video above them.
+   #reel_display gets its own stacking context, so the video always wins. */
+#reel_section .flower_2,
+#reel_section .flower_3 {
+  z-index: 0;
+}
+
+#reel_display {
+  position: relative;
+  z-index: 1;
 }
 
 /*POP-UP SECTION STYLES*/
@@ -691,7 +712,7 @@ body:has(#landing_section) #menu_open img {
   left: -55px;
   top: 10px;
   transform: rotate(15deg);
-  z-index: 3;
+  z-index: 1;
 }
 
 /* Right, beside Clicky and Cordy */
@@ -895,8 +916,9 @@ body:has(#landing_section) #menu_open img {
 /* A package with only one price (Package C) gets a wider, slightly tighter tag */
 .price_tag:only-child {
   width: 180px;
-  padding: 14.5px 8px;
+  padding: 10px 8px;
   line-height: 14.5px;
+  margin-top: 3px;              /* nudges the tag up closer to the card, as in the design */
 }
 
 .price_tag:only-child small {
@@ -971,7 +993,8 @@ body:has(#landing_section) #menu_open img {
   text-align: left;
 }
 
-#booking_form label {
+#booking_form label,
+#booking_form .form_label {
   display: block;
   margin: 0 0 3px 9px;
   font-size: 18px;
@@ -1039,6 +1062,131 @@ body:has(#landing_section) #menu_open img {
   line-height: 1;
   color: var(--black);
   cursor: pointer;
+}
+
+/* Booking form calendar: everything inside is sized in em, so each breakpoint only sets #event_calendar's font-size.
+   script.js builds the markup (.cal_card > .cal_header, .cal_weekdays, .cal_days) and fills in the days. */
+#booking_form input[type="hidden"] {
+  display: none;
+}
+
+#event_calendar {
+  margin-bottom: 16px;
+  font-family: "Chelsea Market", system-ui;
+  font-size: 12px;
+  line-height: 1.2;
+  color: var(--black);
+}
+
+.cal_card {
+  overflow: hidden;
+  padding-bottom: 1em;
+  border-radius: 2.2em;
+  background: var(--white);
+  text-align: center;
+}
+
+.cal_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 3.8em;
+  padding: 0 1em;
+  background: var(--pink);
+  color: var(--white);
+}
+
+.cal_title {
+  font-family: "Chelsea Market", system-ui;
+  font-size: 1.55em;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--white);
+}
+
+.cal_nav {
+  padding: 0.3em;
+  border: 0;
+  background: none;
+  color: var(--white);
+  line-height: 0;
+  cursor: pointer;
+}
+
+.cal_nav svg {
+  display: block;
+  width: 1.7em;
+  height: 1.7em;
+}
+
+.cal_nav:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.cal_weekdays,
+.cal_days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 0 0.7em;
+}
+
+.cal_weekdays {
+  padding-top: 1.2em;
+  padding-bottom: 0.4em;
+}
+
+.cal_days {
+  row-gap: 0.25em;
+}
+
+.cal_day {
+  justify-self: center;
+  width: 2.4em;
+  height: 2.4em;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  font: inherit;
+  color: var(--black);
+  cursor: pointer;
+}
+
+.cal_day:hover {
+  background: var(--pink_light);
+}
+
+.cal_day.is_today {
+  box-shadow: inset 0 0 0 0.1em var(--maroon);
+}
+
+.cal_day[aria-pressed="true"],
+.cal_day[aria-pressed="true"]:hover {
+  background: var(--maroon);
+  color: var(--white);
+}
+
+/* Past days and booked days: greyed out and not pickable (booked days also get a line through them) */
+.cal_day[aria-disabled="true"],
+.cal_day[aria-disabled="true"]:hover {
+  background: none;
+  color: #b5b5b5;
+  cursor: not-allowed;
+}
+
+.cal_day.is_booked {
+  text-decoration: line-through;
+}
+
+.cal_message {
+  margin-top: 0.8em;
+  padding: 0 0.8em;
+  color: var(--white);
+}
+
+.cal_message:empty {
+  display: none;
 }
 
 /*CONTACT PAGE STYLES*/
@@ -1316,16 +1464,2331 @@ footer p {
 /* The Facebook icon is an <img>, so CSS can't change its SVG stroke (that's why the old #fb rule did nothing).
    Instead, four tiny white drop-shadows (no blur) are stacked around the icon to thicken its lines by ~1px.
    Raise or lower the 0.45px to make the stroke thicker or thinner. Only the footer's Facebook icon is affected. */
-#socials a[aria-label="Facebook"] img {
-  filter:
-    drop-shadow(0.45px 0 0 var(--white))
-    drop-shadow(-0.45px 0 0 var(--white))
-    drop-shadow(0 0.45px 0 var(--white))
-    drop-shadow(0 -0.45px 0 var(--white));
-}
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   #site_nav,
   #site_nav.is_open { transition: none; }
+}
+
+/* ============================================================
+   TABLET (700px and up)
+   Same styling as the phone, scaled up. Font sizes: koulen 74, jl_chubby 64, ahkio 40, chelsea 24.
+   Sizes and spacing are the phone numbers x ~1.8 (700 / 390). Home page first; other pages come next.
+   ============================================================ */
+@media (min-width: 700px) {
+
+  :root {
+    --photo_shadow: 11px 9px 4px #0003;
+  }
+
+  /* ---- Type ---- */
+  body { font-size: 24px; }                       /* chelsea */
+
+  .koulen { font-size: 74px; }
+  .koulen .heading1 { font-size: 71px; }          /* line 1 / line 2 keep the same size ratio as the phone */
+  .koulen .heading2 { font-size: 62px; }
+  #reel_section .koulen .heading2 { font-size: 80px; }
+
+  .jl_chubby { font-size: 64px; }
+  .ahkio { font-size: 40px; }
+
+  /* ---- Header ---- */
+    #logo img {
+    width: 134px;
+    height: 134px;
+  }
+
+  #site_header {
+    padding: 30px 48px 0 38px;
+  }
+
+  .menu_toggle {
+    padding: 11px;
+  }
+
+  .menu_toggle img {
+    width: 65px;
+    height: 65px;
+  }
+
+  /* ---- Menu bar ---- */
+  #site_nav {
+    padding: 45px 72px 47px;
+  }
+
+  #menu_close {
+    margin-right: -14px;
+  }
+
+  #menu_close img {
+    width: 59px;
+    height: 59px;
+  }
+
+  #site_nav ul {
+    margin-top: 14px;
+  }
+
+  #site_nav a {
+    font-size: 32px;
+  }
+
+  /* ---- Home: landing ---- */
+  #landing_section {
+    padding-top: 190px;
+    background: linear-gradient(var(--maroon) 0 430px, transparent 430px);
+  }
+
+  .heading {
+    font-size: 96px;
+    line-height: 1;
+  }
+  .tagline { font-size: 24px; }
+
+  .subheading {
+    margin-top: -11px;
+    font-size: 27px;                              /* BY JAME: phone 16px x (40 / 24) */
+  }
+
+  #photo_display {
+    max-width: 900px;
+    height: 500px;
+    margin: 9px auto 0;
+  }
+
+  .photo_container {
+    padding: 7px;
+  }
+
+  .book_button {
+    margin-top: -72px;
+    padding: 24px 41px;
+    font-size: 24px;
+  }
+
+  .flower_1 {
+    width: 250px;
+    right: -65px;
+    top: 620px;
+  }
+
+  /* ---- Home: reel ---- */
+  #reel_section {
+    padding: 75px 36px 54px;
+  }
+
+  .watch_more {
+    margin-top: 4px;
+    font-size: 40px;
+  }
+
+  .reel_button {
+    margin-top: 4px;
+    gap: 11px;
+    padding: 14px 29px;
+    font-size: 20px;
+  }
+
+  .reel_button img {
+    width: 25px;
+    height: 25px;
+  }
+
+  #reel_display {
+    margin-top: 25px;
+  }
+
+  #reel_display video {
+    height: 730px;
+  }
+
+  .flower_2 {
+    width: 205px;
+    left: -16px;
+    top: 500px;
+  }
+
+  .flower_3 {
+    width: 126px;
+    right: 96px;
+    top: 909px;
+  }
+
+  /* ---- Home: pop-ups ---- */
+  #popup_section {
+    grid-template-columns: 245px 180px;
+    padding: 135px 36px 50px;
+  }
+
+  /* dome: same circle as the phone, x 1.8, centered on the page */
+  #popup_section::before {
+    left: 50%;
+    width: 1242px;
+    margin-left: -621px;
+    border-radius: 621px 621px 0 0;
+  }
+
+  .heading1 {
+    font-size: 64px;
+  }
+
+  .heading2 {
+    font-size: 75px;
+    margin-top: 1px;
+  }
+
+  .popup_button {
+    padding: 16px 7px;
+    font-size: 24px;
+  }
+
+  #popup_display {
+    gap: 7px;
+    margin-top: 14px;
+  }
+
+  #popup_display img {
+    width: 340px;
+    height: 387px;
+    padding: 4px;
+  }
+
+  #popup_1 {
+    margin-top: 29px;
+  }
+
+  .flower_4 {
+    width: 107px;
+    left: -36px;
+    bottom: -104px;
+  }
+
+  .flower_5 {
+    width: 126px;
+    right: -49px;
+    top: 166px;
+  }
+
+  /* ---- About: intro ---- */
+  #about_section {
+    padding: 180px 36px 50px;
+  }
+
+  .about_heading {
+    font-size: 96px;
+  }
+
+  /* the description text is 2x bigger, so the max-widths are 2x bigger too: the lines wrap the same way as the phone */
+  .about_description,
+  .about_description2 {
+    max-width: 480px;
+    margin: 24px auto 0;
+    font-size: 24px;
+  }
+
+  .about_description2 {
+    max-width: 480px;
+    margin-top: -2px;
+  }
+
+  #about_photo {
+    width: min(100%, 596px);
+    height: 500px;
+    margin: 27px auto 0;
+    padding: 4px;
+  }
+
+  /* ---- About: products ---- */
+  #products_section {
+    padding: 79px 0 126px;
+  }
+
+  .products_heading {
+    margin-top: -63px;
+    font-size: 64px;                              /* phone 34px x (64 / 47), the same step-up as .jl_chubby */
+    -webkit-text-stroke: 7px var(--maroon);
+    text-shadow: 0 14px 14px #0003;
+  }
+
+  .product {
+    gap: 32px;
+    margin-top: 27px;
+  }
+
+  .products_heading + .product {
+    margin-top: 22px;
+  }
+
+  .product img {
+    width: 272px;
+    height: 263px;
+    padding: 4px;
+  }
+
+  .product_info {
+    width: 220px;                                 /* 2x the phone width, same as the text, so lines wrap the same way */
+  }
+
+  .product_showcase {
+    font-size: 40px;                              /* ahkio */
+  }
+
+  .product_description {
+    margin-top: -4px;
+    font-size: 20px;
+  }
+
+  /* flowers: phone values x 1.8 */
+  #products_section .flower_2 {
+    width: 216px;
+    left: -60px;
+    top: 18px;
+    transform: rotate(3deg);
+  }
+
+  #products_section .flower_3 {
+    width: 246px;
+    right: -18px;
+    top: 824px;
+  }
+
+  /* ---- Footer ---- */
+  footer {
+    gap: 22px;
+    padding: 43px 36px 58px;
+  }
+
+  footer p {
+    font-size: 20px;
+  }
+
+  #socials {
+    gap: 18px;
+  }
+
+  #socials img {
+    width: 32px;
+    height: 32px;
+  }
+
+}
+/* ============================================================
+   BOOK PAGE - TABLET (700px and up)
+   Phone rules stay the same, scaled up. Font sizes: koulen 74, jl_chubby 64, ahkio 40, chelsea 24.
+   Layout change: Package A and B sit side by side, Package C is centered under them.
+   The date field's calendar is left as the browser's own (only the field itself is sized to match).
+   ============================================================ */
+@media (min-width: 700px) {
+
+  /* ---- Intro: photos left, heading + description right ---- */
+  #book_section {
+    max-width: 700px;
+    height: 660px;               /* the PACKAGE heading starts right under this */
+  }
+
+  #book_photos img {
+    width: 238px;
+    height: 281px;
+    padding: 4px;
+  }
+
+  #book_1 {
+    left: 92px;
+    top: 176px;
+  }
+
+  #book_2 {
+    left: 196px;
+    top: 250px;
+  }
+
+  #book_text {
+    top: 208px;
+    right: 44px;
+    width: 196px;
+  }
+
+  .book_heading1 {
+    font-size: 74px;             /* koulen */
+  }
+
+  .book_heading2 {
+    font-size: 90px;             /* same BOOK : NOW size ratio as the phone, so both lines are the same width */
+    margin-top: 5px;
+  }
+
+  .book_description {
+    margin-top: 10px;
+    font-size: 24px;             /* chelsea */
+    line-height: 1.05;
+  }
+
+  #book_section .flower_1 {
+    width: 180px;
+    left: -25px;
+    top: 500px;
+  }
+
+  /* ---- Packages: 2-column grid, A + B on the first row, C centered on the second ---- */
+    #package_section {
+    display: grid;
+    grid-template-columns: repeat(2, 270px);
+    justify-content: center;
+    column-gap: 22px;
+    row-gap: 30px;
+    align-items: stretch;          /* A and B end up the same height */
+    max-width: 700px;
+  }
+
+  .package_heading,
+  .package_start {
+    grid-column: 1 / -1;
+  }
+
+  .package_heading {
+    font-size: 64px;
+    -webkit-text-stroke-width: 9px;
+    text-shadow: 0 9px 9px #0003;
+  }
+
+  .package_start {
+    margin-top: -8px;
+    margin-bottom: 24px;
+    font-size: 40px;
+  }
+
+  /* Each card is a column: title, list (grows), note, price tags.
+     Tags and notes stay level across A and B. */
+  .package_card,
+  .package_card + .package_card {
+    display: flex;
+    flex-direction: column;
+    width: 270px;
+    margin: 0;
+  }
+
+  #package_c {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+
+  .package_card h3 {
+    height: 96px;
+    flex: none;
+    padding: 30px 20px 14px;
+    border-radius: 28px 28px 0 0;
+    font-size: 26px;
+    line-height: 1;
+  }
+
+  /* The list takes the leftover height and the rows share it equally,
+     so A's rows stretch to match B's 2-line row, as in the design */
+  .package_inclusions {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    border-radius: 0 0 20px 20px;
+  }
+
+  .package_inclusions li {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 10px;
+    font-size: 18px;
+    line-height: 1.15;
+    text-align: center;
+  }
+
+  .package_note {
+    flex: none;
+    min-height: 2.4em;             /* two lines, so Package C's blank note keeps the same space */
+    margin: 8px 6px 0;
+    font-family: "Chelsea Market", system-ui, sans-serif;
+    font-size: 12px;
+    line-height: 1.2;
+    color: var(--black);
+    text-align: left;
+  }
+
+  .package_prices {
+    flex: none;
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  .price_tag {
+    width: 118px;
+    min-height: 76px;
+    padding: 10px 8px;
+    border-radius: 18px;
+    font-size: 17px;
+    line-height: 1.15;
+  }
+
+  .price_tag span {
+    font-size: 25px;
+    line-height: 1;
+  }
+
+  .price_tag small {
+    font-size: 11px;
+    line-height: 1.2;
+  }
+
+  .price_tag:only-child {
+    width: 180px;
+    padding: 10px 8px;
+    line-height: 1.15;
+  }
+
+  .price_tag:only-child small {
+    line-height: 1.2;
+  }
+
+  /* Each note adds about 37px per row, so the flowers move down by that much */
+  #package_section .flower_2 {
+    width: 150px;
+    right: -43px;
+    top: 503px;
+  }
+
+  #package_section .flower_3 {
+    width: 110px;
+    left: -30px;
+    top: 735px;
+  }
+
+  /* ---- Booking form ---- */
+  #form_section {
+    max-width: 700px;
+    margin-top: 80px;
+    padding-bottom: 70px;
+  }
+
+  .form_heading {
+    font-size: 46px;             /* koulen, phone 30px x (74 / 48) */
+    line-height: 31px;
+  }
+
+  #booking_form {
+    width: calc(100% - 80px);
+    max-width: 622px;
+    margin-top: 22px;
+    padding: 50px 90px 42px;
+    border-radius: 50px;
+  }
+
+  #booking_form label,
+  #booking_form .form_label {
+    margin: 0 0 4px 14px;
+    font-size: 24px;             /* chelsea */
+    line-height: 26px;
+  }
+
+  #booking_form input,
+  #booking_form select {
+    height: 40px;
+    margin-bottom: 24px;
+    padding: 0 18px;
+    border-width: 4px;
+    border-radius: 14px;
+    font-size: 20px;
+  }
+
+  #booking_form select {
+    padding: 0 44px;
+    background-size: 14px 9px;
+    background-position: right 18px center;
+  }
+
+  /* The date field: sized like the other fields; the calendar that opens from it is the browser's own */
+  #booking_form input[type="date"] {
+    min-width: 0;
+    text-align: left;
+  }
+
+  #book_submit {
+    width: 160px;
+    height: 42px;
+    margin-top: 30px;
+    border-width: 4px;
+    font-size: 20px;
+  }
+
+  /* The calendar card (sized in em from here) */
+  #event_calendar {
+    margin-bottom: 24px;
+    font-size: 19px;
+  }
+}
+/* ============================================================
+   CONTACT PAGE - TABLET (700px and up)
+   Phone rules stay the same, scaled up. Font sizes: koulen 74, chelsea 24.
+   Sizes and spacing are the phone numbers x ~1.8 (700 / 390); koulen-based text uses x 1.54 (74 / 48).
+   Header, menu bar, footer and the .koulen heading size come from the shared tablet block above.
+   ============================================================ */
+@media (min-width: 700px) {
+
+  /* ---- Intro: heading, description and the three pill buttons ---- */
+  #contact_section {
+    padding: 317px 36px 142px;
+  }
+
+  .contact_heading2 {
+    margin-top: 4px;
+  }
+
+  .contact_description {
+    max-width: 480px;            /* 2x the phone width, same as the text, so the line wraps the same way */
+    margin: 14px auto 0;
+    font-size: 24px;             /* chelsea */
+  }
+
+  #contact_buttons {
+    gap: 11px 13px;
+    margin-top: 18px;
+  }
+
+  #contact_buttons a {
+    gap: 11px;
+    padding: 16px 29px;
+    box-shadow: 0 5px 9px #0003;
+    font-size: 22px;
+  }
+
+  #contact_buttons img {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* Contact flowers: phone values x 1.8 */
+  #contact_section .flower_1 {
+    width: 171px;
+    left: -27px;
+    top: 236px;
+  }
+
+  #contact_section .flower_2 {
+    width: 72px;
+    right: 117px;
+    top: 140px;
+  }
+
+  /* ---- Calendar: maroon dome holding a white card per month ---- */
+  #calendar_section {
+    padding: 155px 0 144px;
+    min-height: 540px;
+  }
+
+  #calendar_section::before {
+    width: 864px;
+    margin-left: -441px;
+  }
+
+  .calendar_heading {
+    font-size: 49px;             /* koulen, phone 32px x (74 / 48) */
+  }
+
+  #calendar_section > #events {
+    max-width: 535px;
+    margin: 36px auto 0;
+  }
+
+  .event_month {
+    border-radius: 50px;
+  }
+
+  .event_month + .event_month {
+    margin-top: 29px;
+  }
+
+  .month_title {
+    height: 79px;
+    font-size: 36px;
+  }
+
+  .event_list {
+    gap: 14px;
+    padding: 43px 25px 38px;
+  }
+
+  .event_item {
+    gap: 14px;
+    min-height: 79px;
+    padding: 16px 22px 16px 25px;
+    border-radius: 18px;
+  }
+
+  .event_day {
+    min-width: 47px;
+    font-size: 29px;
+  }
+
+  .event_place {
+    font-size: 22px;
+  }
+
+  .events_message {
+    padding: 0 36px;
+    font-size: 22px;
+  }
+
+  /* Calendar flowers: phone values x 1.8 */
+  #calendar_section .flower_3 {
+    width: 108px;
+    right: 45px;
+    top: -175px;
+  }
+
+  #calendar_section .flower_4 {
+    width: 68px;
+    left: 56px;
+    top: 95px;
+  }
+
+  #calendar_section .flower_5 {
+    width: 94px;
+    left: 52px;
+    bottom: 95px;
+  }
+
+  #calendar_section .flower_6 {
+    width: 166px;
+    right: -18px;
+    bottom: -14px;
+  }
+}
+
+/* About page flowers, phone + tablet: under the product photos (photos are z-index 2).
+   Limited to under 1024px so the desktop rules keep working. */
+@media (max-width: 1023px) {
+  .flower_about_pink {
+    display: none;               /* not in the phone/tablet design */
+  }
+
+  /* Left of the PRODUCTS heading */
+  #products_section .flower_about_maroon_top {
+    width: 120px;
+    left: -55px;
+    right: auto;
+    top: 10px;
+    transform: rotate(15deg);
+    z-index: 1;
+  }
+
+  /* Right, beside Clicky and Cordy */
+  #products_section .flower_about_maroon_mid {
+    width: 120px;
+    left: auto;
+    right: -32px;
+    top: 458px;
+    transform: rotate(-2deg);
+    z-index: 1;
+  }
+}
+
+/* Tablet sizes (same as your existing flower_2 / flower_3 tablet values) */
+@media (min-width: 700px) and (max-width: 1023px) {
+  #products_section .flower_about_maroon_top {
+    width: 216px;
+    left: -99px;
+    top: 18px;
+  }
+
+  #products_section .flower_about_maroon_mid {
+    width: 216px;
+    right: -58px;
+    top: 824px;
+  }
+}
+
+/* Desktop-only extras: the Steps section, the third pop-up photo and the left hero flower
+   are only shown from 1024px up */
+#steps_section,
+#popup_display #popup_3,
+.flower_landing_left {
+  display: none;
+}
+
+/* Book page: these three flowers only have desktop rules, so hide them on phone and tablet */
+@media (max-width: 1023px) {
+  .flower_book_top,
+  .flower_book_pink,
+  .flower_form_left,
+  .flower_form_right {
+    display: none;
+  }
+}
+
+/* Package notes: part of the tablet and desktop designs, not the phone */
+@media (max-width: 699px) {
+  .package_note {
+    display: none;
+  }
+}
+
+/* ============================================================
+   DESKTOP VIEWPORT (1024px and up, 1440px target)
+   ============================================================ */
+@media (min-width: 1024px) {
+
+  :root {
+    --photo_shadow: 12px 10px 4px rgba(0, 0, 0, 0.22);
+  }
+
+  /* ---- GLOBAL DESKTOP HEADER & NAVBAR PILL ---- */
+  #site_header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px 60px 0 40px;   /* same on every page */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+  }
+
+  #logo {
+    display: block;
+  }
+
+  #logo img {
+    width: 145px;
+    height: 145px;
+    display: block;
+  }
+
+  /* Home page only: logo hidden on desktop */
+  body:has(#landing_section) #site_header {
+    justify-content: flex-end;
+  }
+  body:has(#landing_section) #logo {
+    display: none;
+  }
+
+  /* Hamburger & close buttons hidden on desktop */
+  .menu_toggle,
+  #menu_open,
+  #menu_close {
+    display: none;
+  }
+
+  /* Floating White Nav Pill */
+  #site_nav {
+    position: static;
+    transform: none;
+    visibility: visible;
+    background: var(--white);
+    border-radius: 999px;
+    padding: 12px 58px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  #site_nav ul {
+    display: flex;
+    flex-direction: row;
+    gap: 56px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: auto;
+  }
+
+  #site_nav a {
+    font-family: "Chelsea Market", system-ui, sans-serif;
+    font-size: 24px;
+    color: var(--black);
+  }
+
+  #site_nav a[aria-current="page"] {
+    color: var(--pink);
+  }
+
+
+  /* ============================================================
+     1. HOME PAGE DESKTOP  (design frame = 1440px)
+     Written for the flat index.html markup (the same one the phone and tablet CSS uses).
+     Sizes use clamp() so everything scales down to 1024px and stops growing at the design size.
+     ============================================================ */
+
+  /* ---- Hero ---- */
+  #landing_section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 192px 0 73px;
+    background: var(--pink);
+    text-align: center;
+    overflow: visible;
+  }
+
+  /* Maroon dome: full width, pink strip above it (as in the design) */
+  #landing_section::before {
+    content: "";
+    position: absolute;
+    top: 82px;
+    bottom: 0;
+    left: 50%;
+    width: max(1600px, 111.2vw);   /* 1600px at the 1440px design size, then grows with the screen so the curve keeps its shape */
+    transform: translateX(-50%);
+    background: var(--maroon);
+    border-radius: 50% 50% 0 0 / 430px 430px 0 0;
+    z-index: 0;
+  }
+
+  #landing_section > *:not(.flower) {
+    position: relative;
+    z-index: 2;
+  }
+
+  .tagline {
+    font-size: 32px;
+    line-height: 1;
+    color: var(--white);
+  }
+
+  .heading {
+    margin-top: -6px;
+    font-size: 140px;
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    color: var(--white);
+  }
+
+  .subheading {
+    margin-top: -10px;
+    font-size: 32px;
+    line-height: 1.1;
+    color: var(--white);
+  }
+
+  /* In the markup the button comes after the photos; on desktop it sits on top of them */
+  .book_button {
+    order: 1;
+    margin-top: 19px;
+    padding: 17px 48px;
+    font-size: 32px;
+    background: var(--pink);
+    color: var(--white);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  #landing_section > .book_button {
+    z-index: 5;
+  }
+
+  #photo_display {
+    order: 2;
+    width: 100%;
+    max-width: 1220px;
+    height: 560px;
+    margin: -75px 0 0;
+  }
+
+  .photo_container {
+    box-sizing: border-box;
+    padding: 8px;
+  }
+
+  #photo_1_container {
+    width: 200px;
+    height: 500px;
+    left: 31px;
+    right: auto;
+    top: 22px;
+    transform: rotate(-8deg);
+    z-index: 1;
+  }
+
+  #photo_2_container {
+    width: 200px;
+    height: 490px;
+    left: calc(50% - 100px);
+    right: auto;
+    top: 41px;
+    transform: none;
+    z-index: 2;
+  }
+
+  #photo_3_container {
+    width: 30%;
+    height: 500px;
+    left: auto;
+    right: 33px;
+    top: 22px;
+    transform: rotate(8deg);
+    z-index: 1;
+  }
+
+  #landing_section .flower_1 {
+    display: block;
+    width: 230px;
+    left: auto;
+    right: -75px;
+    top: auto;
+    bottom: -50px;
+    z-index: 3;
+  }
+
+  .flower_landing_left {
+    display: block;
+    width: 150px;
+    left: -50px;
+    top: 540px;
+    z-index: 3;
+  }
+
+  /* ---- Reel: video on the left, text block centered on the right ---- */
+  #reel_section {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: 1fr auto auto auto 1fr;
+    justify-content: center;
+    align-items: center;
+    column-gap: clamp(36px, 5vw, 72px);
+    box-sizing: border-box;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 95px 40px 74px;
+    text-align: center;
+  }
+
+  #reel_display {
+    grid-column: 1;
+    grid-row: 1 / 6;
+    order: 0;
+    margin: 0;
+  }
+
+  #reel_display video {
+    display: block;
+    width: clamp(300px, 29.6vw, 426px);
+    height: auto;
+    aspect-ratio: 9 / 16;
+    background: #D9D9D9;
+  }
+
+  #reel_section .koulen {
+    grid-column: 2;
+    grid-row: 2;
+    order: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* #reel_section .koulen .heading2 is what the tablet rule uses, so match it or the tablet size wins */
+  #reel_section .koulen .heading1 {
+    font-size: clamp(64px, 6.67vw, 96px);
+    line-height: 0.84;
+    color: var(--maroon);
+  }
+
+  #reel_section .koulen .heading2 {
+    font-size: clamp(75px, 7.8vw, 112px);
+    line-height: 0.84;
+    color: var(--maroon);
+  }
+
+  .watch_more {
+    grid-column: 2;
+    grid-row: 3;
+    order: 0;
+    margin-top: 28px;
+    font-size: clamp(22px, 2.2vw, 32px);
+    line-height: 1.1;
+    color: var(--maroon);
+  }
+
+  .reel_button {
+    grid-column: 2;
+    grid-row: 4;
+    order: 0;
+    justify-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 10px;
+    padding: 17px 48px;
+    font-size: clamp(22px, 2.2vw, 32px);
+    background: var(--maroon);
+    color: var(--white);
+    border-radius: 999px;
+  }
+
+  .reel_button img {
+    width: 32px;
+    height: 32px;
+    filter: brightness(0) invert(1);
+  }
+
+  #reel_section .flower_2,
+  #reel_section .flower_3 {
+    display: none;
+  }
+
+  /* ---- Steps (desktop only) ---- */
+  #steps_section {
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    padding: 52px 40px 47px;
+    background: var(--pink);
+    overflow: visible;
+  }
+
+  .steps_container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: clamp(24px, 3.5vw, 51px);
+    max-width: 1218px;
+    margin: 0 auto;
+  }
+
+  .step_item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .step_title {
+    margin-bottom: 38px;
+    font-family: "Chelsea Market", system-ui, sans-serif;
+    font-weight: 400;
+    font-size: clamp(24px, 2.2vw, 32px);
+    line-height: 1.1;
+    color: var(--white);
+  }
+
+  .step_photo_wrap {
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    padding: 7px;
+    background: var(--white);
+    box-shadow: var(--photo_shadow);
+  }
+
+  .step_photo_wrap img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Flowers: the first three sit behind the photos, the maroon one straddles the section edge */
+  .flower_steps_left {
+    display: block;
+    width: 135px;
+    left: -4px;
+    top: 20px;
+    z-index: 0;
+  }
+
+  .flower_steps_mid {
+    display: block;
+    width: 170px;
+    left: 30%;
+    top: 210px;
+    z-index: 0;
+  }
+
+  .flower_steps_right {
+    display: block;
+    width: 150px;
+    right: 6px;
+    top: 125px;
+    z-index: 0;
+  }
+
+  .flower_steps_bottom {
+    display: block;
+    width: 157px;
+    left: 58.9%;
+    bottom: -85px;
+    z-index: 10;
+  }
+
+  /* ---- Pop-ups: heading + button on the left, three tilted photos on the right ---- */
+  #popup_section {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: 1fr auto auto 1fr;
+    justify-content: center;
+    align-items: center;
+    column-gap: clamp(16px, 1.7vw, 25px);
+    box-sizing: border-box;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 60px 24px 40px clamp(40px, 6.5vw, 93px);
+  }
+
+  #popup_section::before {
+    display: none;
+  }
+
+  #popup_section .koulen {
+    grid-column: 1;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--maroon);
+  }
+
+  #popup_section .heading2 {
+    margin-top: 0;
+    font-size: clamp(64px, 7.8vw, 112px);
+    line-height: 0.84;
+    color: var(--maroon);
+  }
+
+  #popup_section .heading1 {
+    font-size: clamp(72px, 8.9vw, 128px);
+    line-height: 0.84;
+    color: var(--maroon);
+  }
+
+  .popup_button {
+    grid-column: 1;
+    grid-row: 3;
+    justify-self: center;
+    margin-top: 19px;
+    padding: 17px clamp(28px, 3.3vw, 48px);
+    font-size: clamp(22px, 2.2vw, 32px);
+    white-space: nowrap;
+    background: var(--maroon);
+    color: var(--white);
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  #popup_display {
+    grid-column: 2;
+    grid-row: 1 / 5;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: clamp(10px, 1.5vw, 22px);
+    margin: 0;
+  }
+
+  #popup_display img {
+    width: clamp(190px, 19vw, 280px);
+    height: auto;
+    aspect-ratio: 285 / 397;
+    padding: 7px;
+  }
+
+  #popup_1 {
+    margin-top: 30px;
+    transform: rotate(5deg);
+  }
+
+  #popup_2 {
+    margin-top: 114px;
+    transform: rotate(-4deg);
+  }
+
+  #popup_display #popup_3 {
+    display: block;
+    margin-top: 0;
+    transform: rotate(-3.5deg);
+  }
+
+  #popup_section .flower_4 {
+    display: block;
+    width: 125px;
+    left: -5px;
+    right: auto;
+    top: auto;
+    bottom: 50px;
+    transform: rotate(15deg);
+  }
+
+  #popup_section .flower_5 {
+    display: none;
+  }
+
+  /* ============================================================
+     2. ABOUT PAGE DESKTOP  (design frame = 1440px)
+     Written for the flat about.html markup (the same one the phone and tablet CSS uses).
+     ============================================================ */
+
+  /* Plain paper behind the whole page: the pink/blue gradient lives on the intro section only */
+  body:has(#about_section) {
+    background:
+      var(--paper_img) top center / 100% auto repeat-y,
+      var(--paper);
+  }
+
+  /* ---- Intro: heading + text on the left, photo on the right ---- */
+  #about_section {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, clamp(300px, 29.6vw, 426px)) minmax(0, clamp(480px, 52vw, 750px));
+    grid-template-rows: 1fr auto auto auto 1fr;
+    column-gap: 85px;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 199px 40px 75px;
+    text-align: right;
+    overflow: visible;
+    background:
+      radial-gradient(ellipse 55% 85% at 0% 0%,
+        rgba(254, 176, 189, 0.85) 0%,
+        rgba(254, 176, 189, 0.45) 45%,
+        rgba(254, 176, 189, 0) 100%),
+      radial-gradient(ellipse 45% 70% at 100% 100%,
+        rgba(254, 176, 189, 0.85) 0%,
+        rgba(254, 176, 189, 0.45) 45%,
+        rgba(254, 176, 189, 0) 100%),
+      linear-gradient(135deg, #ECF7F9, #E6F5F8 60%, #F2F9FA);
+  }
+
+  .about_heading {
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0 0 17px;
+    font-size: clamp(96px, 9.7vw, 140px);
+    line-height: 0.85;
+    white-space: nowrap;
+    text-align: right;
+    color: var(--maroon);
+  }
+
+  .about_description,
+  .about_description2 {
+    justify-self: end;
+    /* max-width: 350px; */
+    margin: 0;
+    font-size: clamp(30px, 1.9vw, 26px);
+    line-height: 1.1;
+    text-align: right;
+    color: var(--black);
+    margin-right: -40px;
+  }
+
+  .about_description {
+    grid-column: 1;
+    grid-row: 3;
+     width: 300px;
+  }
+
+  /* the bottom margin lifts the text block a little above the photo's centre, as in the design */
+  .about_description2 {
+    grid-column: 1;
+    grid-row: 4;
+    margin-bottom: 54px;
+     max-width: 400px;
+  }
+
+  #about_photo {
+    grid-column: 2;
+    grid-row: 1 / 6;
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    aspect-ratio: 750 / 626;
+    margin: 0;
+    padding: 7px;
+    box-sizing: border-box;
+    background: var(--white);
+    box-shadow: var(--photo_shadow);
+    object-fit: cover;
+    
+  }
+
+  #about_photo img {
+    transform: scale(1.8);
+    overflow: hidden;
+  }
+
+  .flower_about_pink {
+    display: block;
+    width: 174px;
+    left: 22px;
+    right: auto;
+    top: 777px;
+    bottom: auto;
+    z-index: 2;
+  }
+
+  /* ---- Products: one row per product, tilted photo + text ---- */
+  #products_section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 125px 40px 85px;
+    overflow: visible;
+  }
+
+  .products_heading {
+    margin: 0 0 70px;
+    font-size: clamp(64px, 6.67vw, 96px);
+    -webkit-text-stroke: 8px var(--maroon);
+    text-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+
+  .product {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    width: 100%;
+    max-width: 900px;
+    margin: 46px 0 0;
+  }
+
+  .products_heading + .product {
+    margin-top: 0;
+  }
+
+  /* photos sit above the flowers (the phone rule gives them z-index 2) */
+  .product img {
+    flex: none;
+    width: clamp(280px, 28.5vw, 410px);
+    height: auto;
+    aspect-ratio: 410 / 390;
+    padding: 6px;
+    transform: rotate(8deg);
+  }
+
+  .product_3 img {
+    transform: rotate(6.5deg);
+  }
+
+  .product_4 img {
+    transform: rotate(6deg);
+  }
+
+  .product_info {
+    flex: none;
+    width: clamp(260px, 23.6vw, 340px);
+    text-align: left;
+  }
+
+  .product_showcase {
+    display: block;
+    font-size: clamp(40px, 3.75vw, 54px);
+    line-height: 1;
+    color: var(--maroon);
+  }
+
+  .product_description {
+    margin-top: 6px;
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.1;
+    color: var(--black);
+  }
+
+  /* Flowers: top-right corner of the section, and the big one on the left beside Loopsy */
+  #products_section .flower_2 {
+    width: 200px;
+    left: auto;
+    right: -20px;
+    top: 0;
+    transform: rotate(8deg);
+    z-index: 1;
+  }
+
+  #products_section .flower_3 {
+    width: 350px;
+    left: -10px;
+    right: auto;
+    top: 682px;
+    transform: rotate(-5deg);
+    z-index: 1;
+  }
+
+
+  /* ============================================================
+     3. BOOK PAGE DESKTOP (design frame = 1440px, content centered so 1920px works too)
+     ============================================================ */
+  /* Plain paper below the hero (the pink glow now lives inside the hero band) */
+  body:has(#book_section) {
+    background: var(--paper_img) top center / 100% auto repeat-y, var(--paper);
+  }
+
+  /* ---- Intro / hero: full-width band that ends in a hard edge, photos left, heading right ---- */
+  #book_section {
+    width: 100%;
+    max-width: none;
+    height: 890px;
+    margin: 0;
+    background:
+      radial-gradient(ellipse 55% 75% at 0% 0%,
+        rgba(254, 176, 189, 0.85) 0%,
+        rgba(254, 176, 189, 0.45) 45%,
+        rgba(254, 176, 189, 0) 100%),
+      radial-gradient(ellipse 40% 60% at 100% 100%,
+        rgba(254, 176, 189, 0.70) 0%,
+        rgba(254, 176, 189, 0) 100%),
+      radial-gradient(ellipse 50% 22% at 55% 0%,
+        rgba(254, 176, 189, 0.35) 0%,
+        rgba(254, 176, 189, 0) 100%),
+      linear-gradient(rgba(226, 243, 247, 0.9), rgba(226, 243, 247, 0.9)),   /* the pale blue middle */
+      var(--paper_img) top center / 100% auto repeat-y,
+      var(--paper);
+  }
+
+  /* Photo positions are measured from the page center (50%) so they stay put on wider screens */
+  #book_photos img {
+    margin-top: 50px;
+    padding: 5px;
+  }
+
+  #book_1 {
+    left: calc(50% - 607px);
+    top: 235px;
+    transform: rotate(2deg) scale(2);
+  }
+
+  #book_2 {
+    left: calc(50% - 307px);
+    top: 316px;
+    transform: rotate(-3deg) scale(2);
+  }
+
+  /* Anchored by its right edge (about 587px right of center) so the text grows leftwards if it is wider than expected */
+  #book_text {
+    top: 372px;
+    left: auto;
+    right: calc(50% - 587px);
+    width: max-content;
+    text-align: right;
+  }
+
+  /* BOOK and NOW sit on one line on desktop */
+  #book_text .koulen {
+    font-size: 124px;
+    line-height: 0.85;
+    white-space: nowrap;
+  }
+
+  #book_text .koulen span {
+    display: inline;
+    font-size: inherit;
+    margin: 0;
+  }
+
+  .book_description {
+    max-width: 340px;
+    margin: 8px 9px 0 auto;
+    font-size: 32px;
+    line-height: 1.02;
+  }
+
+  /* The phone/tablet maroon flower is swapped for the pale pink one on desktop */
+  #book_section .flower_1 {
+    display: none;
+  }
+
+  /* Pale pink flower crossing the edge of the hero */
+  .flower_book_pink {
+    display: block;
+    width: 175px;
+    left: calc(50% - 984px);
+    top: 777px;
+    transform: rotate(-5deg);
+  }
+
+  /* Maroon flower, top right, running off the screen edge */
+  .flower_book_top {
+    display: block;
+    width: 165px;
+    left: auto;
+    right: -30px;
+    top: 138px;
+    transform: rotate(9deg);
+    z-index: auto;
+  }
+
+  /* ---- Packages: ONE table, three columns that share their rows ---- */
+  #package_section {
+    display: grid;
+    grid-template-columns: minmax(20px, 1fr) repeat(3, minmax(0, 400px)) minmax(20px, 1fr);
+    column-gap: 0;
+    row-gap: 0;
+    justify-content: normal;
+    align-items: stretch;
+    width: 100%;
+    max-width: none;
+    padding-top: 104px;
+  }
+
+  .package_heading {
+    font-size: 96px;
+    -webkit-text-stroke-width: 8px;
+    text-shadow: 0 9px 9px #0003;
+  }
+
+  .package_start {
+    margin-top: -4px;
+    margin-bottom: 70px;
+    font-size: 64px;
+  }
+
+  /* Each card spans 7 rows of the section grid and hands them on (subgrid), so row 1 of A, B and C line up,
+     row 2 lines up, and so on. 1 = title, 2-5 = list rows, 6 = note, 7 = price tags. */
+  .package_card,
+  .package_card + .package_card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: subgrid;
+    grid-row: 3 / span 7;
+    width: auto;
+    margin: 0;
+  }
+
+  #package_a { grid-column: 2; }
+  #package_b { grid-column: 3; }
+  #package_c { grid-column: 4; }
+
+  .package_card h3 {
+    grid-row: 1;
+    height: auto;
+    min-height: 174px;
+    padding-top: 40px;
+    padding: 0 20px;               /* narrow enough that "PREMIUM PACKAGE A" breaks onto two lines */
+    border-radius: 0;
+    font-size: 40px;
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+  }
+
+  #package_a h3 { border-radius: 30px 0 0 0; }
+  #package_c h3 { border-radius: 0 30px 0 0; }
+
+  #package_b h3,
+  #package_c h3 {
+    border-left: 1px solid rgba(0, 0, 0, 0.25);
+  }
+
+  /* The <ul> steps out of the way so its rows become rows of the shared table */
+  .package_inclusions {
+    display: contents;
+  }
+
+  #package_section .package_inclusions li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 14px;
+    border-top: 1px solid rgba(115, 19, 31, 0.45);
+    border-left: 1px solid rgba(115, 19, 31, 0.45);
+    background: var(--pink_light);
+    font-size: 22px;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .package_inclusions li:nth-child(1) { grid-row: 2; border-top-color: transparent; }
+  .package_inclusions li:nth-child(2) { grid-row: 3; }
+  .package_inclusions li:nth-child(3) { grid-row: 4; }
+  .package_inclusions li:nth-child(4) { grid-row: 5; }
+
+  #package_section .package_inclusions li:last-child {
+    border-bottom: 1px solid rgba(115, 19, 31, 0.45);
+  }
+
+  #package_section #package_a li:last-child { border-bottom-left-radius: 26px; }
+  #package_section #package_c li { border-right: 1px solid rgba(115, 19, 31, 0.45); }
+  #package_section #package_c li:last-child { border-bottom-right-radius: 26px; }
+
+  .package_note {
+    grid-row: 6;
+    min-height: 0;
+    margin: 12px 14px 10px;
+    font-size: 20px;
+    line-height: 1.05;
+    text-align: left;
+  }
+
+  /* Price tags: "50 pax / P189 each" on the left, the price on the right */
+  .package_prices {
+    grid-row: 7;
+    align-self: start;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 12px;
+    margin-top: 0;
+    padding: 0 14px;
+  }
+
+  /* No note under Package C, so its tag gets the same space on top */
+  #package_c .package_prices {
+    margin-top: 12px;
+  }
+
+  .package_prices .price_tag,
+  .package_prices .price_tag:only-child {
+    display: grid;
+    grid-template-columns: 150px auto;
+    grid-template-rows: auto auto;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    column-gap: 28px;
+    width: auto;
+    min-height: 108px;
+    padding: 12px 14px;
+    border-radius: 22px;
+    font-size: 28px;
+    line-height: 1;
+    text-align: left;
+  }
+
+  .price_tag span {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    font-size: 42px;
+    line-height: 1.3;
+  }
+
+  .price_tag small {
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  /* Maroon flower tucked behind the left edge of the table (the phone's second flower is not used here) */
+  #package_section .flower_2 {
+    display: none;
+  }
+
+  #package_section > .flower {
+    grid-column: unset;
+    grid-row: unset;
+  }
+
+  #package_section .flower_3 {
+    display: block;
+    width: 180px;
+    right: auto;
+    z-index: auto;
+    left: calc(50% - 712px);
+    top: 566px;
+    transform: rotate(0deg);
+  }
+
+  /* ---- Booking form: 2-column maroon card (name | date, contact | rate, link across the bottom) ---- */
+  #form_section {
+    position: relative;
+    width: 100%;
+    max-width: none;
+    margin-top: 130px;
+    padding-bottom: 160px;
+  }
+
+  .form_heading {
+    font-size: 82px;
+    line-height: 1;
+  }
+
+  #booking_form {
+    display: grid;
+    grid-template-columns: minmax(0, 465fr) minmax(0, 510fr);
+    column-gap: 44px;
+    align-items: start;
+    width: calc(100% - 80px);
+    max-width: 1190px;
+    margin-top: 28px;
+    padding: 80px 84px 92px;
+    border-radius: 40px;
+    row-gap: 0;
+  }
+
+  /* Left column: name, contact, link, rate. Right column: "Day of event" + the calendar spanning the rows next to them. */
+  label[for="name"]       { grid-column: 1; grid-row: 1; }
+  #name                   { grid-column: 1; grid-row: 2; }
+  label[for="number"]     { grid-column: 1; grid-row: 3; }
+  #number                 { grid-column: 1; grid-row: 4; }
+  label[for="social"]     { grid-column: 1; grid-row: 5; }
+  #social                 { grid-column: 1; grid-row: 6; }
+  label[for="rate_type"]  { grid-column: 1; grid-row: 7; }
+  #rate_type              { grid-column: 1; grid-row: 8; margin-bottom: 0; }
+
+  #event_date_label       { grid-column: 2; grid-row: 1; }
+  #event_calendar {
+    grid-column: 2;
+    grid-row: 2 / span 7;
+    align-self: start;
+    margin-bottom: 0;
+    font-size: 20px;
+  }
+
+  #booking_form label,
+  #booking_form .form_label {
+    margin: 0 0 8px 20px;
+    font-size: 30px;
+    line-height: 34px;
+  }
+
+  #booking_form input,
+  #booking_form select {
+    height: 62px;
+    margin-bottom: 32px;
+    padding: 0 26px;
+    border-width: 4px;
+    border-radius: 16px;
+    font-size: 26px;
+  }
+
+  #booking_form select {
+    padding: 0 56px;
+    background-size: 18px 11px;
+    background-position: right 24px center;
+  }
+
+  #book_submit {
+    grid-column: 1 / -1;
+    grid-row: 9;
+    justify-self: center;
+    width: 248px;
+    height: 63px;
+    margin-top: 36px;
+    border-width: 4px;
+    font-size: 28px;
+  }
+
+  /* Form flowers: maroon, one off the left edge beside the card, one off the right edge below it */
+  .flower_form_left {
+    display: block;
+    width: 140px;
+    right: auto;
+    bottom: auto;
+    z-index: auto;
+    left: calc(50% - 752px);
+    top: 330px;
+    transform: rotate(8deg);
+  }
+
+  .flower_form_right {
+    display: block;
+    right: auto;
+    bottom: auto;
+    z-index: auto;
+    width: 190px;
+    left: calc(50% + 627px);
+    top: 824px;
+    transform: rotate(-12deg);
+  }
+
+  #book_submit:hover {
+    background: var(--pink);
+    color: var(--white);
+  }
+
+
+  /* ============================================================
+     4. CONTACT PAGE DESKTOP  (design frame = 1440px, content centered so 1920px works too)
+     Uses the shared desktop footer below. The maroon dome runs down into the footer.
+     ============================================================ */
+
+  /* Pale blue page with pink glows at the top-left and top-right (no paper texture, as in the design) */
+  body:has(#contact_section) {
+    background:
+      radial-gradient(ellipse 70% 760px at 0% 0%,
+        rgba(254, 176, 189, 0.85) 0%,
+        rgba(254, 176, 189, 0.45) 45%,
+        rgba(254, 176, 189, 0) 100%) no-repeat,
+      radial-gradient(ellipse 45% 620px at 100% 0%,
+        rgba(254, 176, 189, 0.60) 0%,
+        rgba(254, 176, 189, 0) 100%) no-repeat,
+      linear-gradient(135deg, #ECF7F9, #E6F5F8 60%, #F2F9FA);
+  }
+
+  /* ---- Intro: heading on ONE line, description on one line, three pill buttons in a row ---- */
+  #contact_section {
+    padding: 225px 40px 64px;
+  }
+
+  #contact_section .koulen {
+    font-size: 96px;
+    line-height: 0.9;
+  }
+
+  #contact_section .koulen span {
+    display: inline;             /* OFFICIAL and CONTACTS side by side */
+    font-size: inherit;
+  }
+
+  .contact_heading2 {
+    margin-top: 0;
+  }
+
+  .contact_description {
+    max-width: none;
+    margin: 8px auto 0;
+    font-size: clamp(24px, 2.2vw, 32px);
+    line-height: 1.1;
+    letter-spacing: 0.04em;
+  }
+
+  #contact_buttons {
+    flex-wrap: nowrap;
+    gap: 12px;
+    margin-top: 56px;
+  }
+
+  #contact_buttons a {
+    gap: 14px;
+    padding: 17px 36px;
+    font-size: 24px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  #contact_buttons img {
+    width: 38px;
+    height: 38px;
+  }
+
+  /* Flowers in the intro (left one bleeds off the edge, right one is anchored to the 1440px frame) */
+  #contact_section .flower_1 {
+    width: 370px;
+    left: -95px;
+    right: auto;
+    top: 216px;
+    bottom: auto;
+    transform: none;
+  }
+
+  #contact_section .flower_2 {
+    width: 155px;
+    left: auto;
+    right: calc(50% - 605px);
+    top: 394px;
+    bottom: auto;
+    transform: none;
+  }
+
+  /* ---- Calendar: wide maroon dome, white card in the middle ---- */
+  #calendar_section {
+    padding: 84px 0 170px;
+    min-height: 700px;
+  }
+
+  #calendar_section::before {
+    left: 50%;
+    width: max(1700px, 100%);
+    margin-left: 0;
+    transform: translateX(-50%);
+    border-radius: 50% 50% 0 0 / 480px 480px 0 0;
+  }
+
+  .calendar_heading {
+    font-size: 68px;
+    line-height: 1;
+  }
+
+  #calendar_section > #events {
+    max-width: 864px;
+    margin: 15px auto 0;
+  }
+
+  .event_month {
+    border-radius: 50px;
+  }
+
+  .event_month:only-child {
+    min-height: 368px;           /* white card keeps its size even with only one or two events */
+  }
+
+  .event_month + .event_month {
+    margin-top: 29px;
+  }
+
+  .month_title {
+    height: 81px;
+    font-size: 36px;
+  }
+
+  .event_list {
+    gap: 17px;
+    padding: 22px 32px 34px;
+  }
+
+  .event_item {
+    gap: 16px;
+    min-height: 59px;
+    padding: 10px 22px;
+    border-radius: 17px;
+  }
+
+  .event_day {
+    min-width: 100px;
+    font-size: 24px;
+  }
+
+  .event_place {
+    font-size: 24px;
+  }
+
+  .events_message {
+    padding: 0 40px;
+    font-size: 26px;
+  }
+
+  /* Calendar flowers (the maroon one above the dome is not in the desktop design) */
+  #calendar_section .flower_3 {
+    display: none;
+  }
+
+  #calendar_section .flower_4 {
+    width: 81px;
+    left: calc(50% - 539px);
+    top: 155px;
+  }
+
+  #calendar_section .flower_5 {
+    width: 150px;
+    left: -20px;
+    top: 458px;
+    bottom: auto;
+    transform: rotate(7deg);
+  }
+
+  #calendar_section .flower_6 {
+    width: 140px;
+    right: 40px;
+    top: 527px;
+    bottom: auto;
+  }
+
+
+  /* ---- GLOBAL FOOTER (ALL PAGES) ---- */
+  footer {
+    padding: 55px 40px 65px;
+    background: var(--pink);
+    color: var(--white);
+    gap: 22px;
+  }
+
+  footer p {
+    font-size: 24px;
+    letter-spacing: 0.05em;
+    color: var(--white);
+  }
+
+  #socials {
+    gap: 24px;
+  }
+
+  #socials img {
+    width: 36px;
+    height: 36px;
+    filter: brightness(0) invert(1);
+  }
+}
+
+/* ============================================================
+   HOMEPAGE IMAGE / DECORATION FIXES
+   ============================================================ */
+
+/* Keep every hero photo fully inside its white instant-photo frame. */
+:root {
+  --photo_shadow: 3px 3px 2px rgba(0, 0, 0, 0.16);
+}
+
+.photo_container {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  overflow: hidden;
+  padding: 5px;
+  background: #fff;
+  box-shadow: var(--photo_shadow);
+}
+
+.photo_container img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Ensure the steps use matching square frames regardless of their source photo proportions. */
+#steps_section .steps_container {
+  align-items: start;
+}
+
+#steps_section .step_item {
+  min-width: 0;
+}
+
+#steps_section .step_photo_wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  padding: 4px;
+  box-shadow: var(--photo_shadow);
+}
+
+#steps_section .step_photo_wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+/* Give the first two pop-up photos enough breathing room even when rotated. */
+#popup_display {
+  column-gap: 16px;
+  gap: 16px;
+}
+
+#popup_display img {
+  flex: 0 1 auto;
+  box-shadow: var(--photo_shadow);
+}
+
+/* More restrained shadows on the homepage's framed photos. */
+#photo_display .photo_container,
+#steps_section .step_photo_wrap,
+#popup_display img {
+  box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.16);
+}
+
+/* Flowers: keep the decorations near the edges instead of covering the content. */
+#landing_section .flower_1 {
+  width: 82px;
+  right: -20px;
+  top: auto;
+  bottom: -18px;
+}
+
+#landing_section .flower_landing_left {
+  width: 54px;
+  left: -22px;
+  top: 255px;
+  z-index: 3;
+}
+
+#reel_section .flower_2 {
+  width: 66px;
+  left: -22px;
+  top: 245px;
+}
+
+#reel_section .flower_3 {
+  width: 58px;
+  right: -14px;
+  top: auto;
+  bottom: 20px;
+}
+
+#steps_section .flower_steps_left {
+  width: 60px;
+  left: -12px;
+  top: 8px;
+}
+
+#steps_section .flower_steps_mid {
+  width: 66px;
+  left: 58%;
+  top: auto;
+  bottom: -32px;
+}
+
+#steps_section .flower_steps_right {
+  width: 62px;
+  right: -12px;
+  top: 55px;
+}
+
+#steps_section .flower_steps_bottom {
+  width: 58px;
+  left: 58%;
+  bottom: -28px;
+}
+
+#popup_section .flower_4 {
+  width: 58px;
+  left: 52%;
+  bottom: 12px;
+}
+
+#popup_section .flower_5 {
+  width: 70px;
+  right: -18px;
+  top: 30px;
+}
+
+/* Desktop/tablet layout: retain the reference's wider, centered photo composition. */
+@media (min-width: 700px) {
+  :root {
+    --photo_shadow: 4px 4px 2px rgba(0, 0, 0, 0.16);
+  }
+
+  #photo_display {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .photo_container {
+    padding: 7px;
+  }
+
+  #photo_1_container {
+    width: 39%;
+    height: 72%;
+    left: 6%;
+    top: 7%;
+  }
+
+  #photo_2_container {
+    width: 39%;
+    height: 76%;
+    left: 30.5%;
+    top: 14%;
+  }
+
+  #photo_3_container {
+    width: 39%;
+    height: 72%;
+    right: 9%;
+    top: 7%;
+  }
+
+  #steps_section .step_photo_wrap {
+    padding: 5px;
+  }
+
+  #popup_display {
+    gap: clamp(14px, 1.8vw, 24px);
+  }
+
+  #popup_display img {
+    box-shadow: 4px 4px 2px rgba(0, 0, 0, 0.16);
+  }
+
+  #popup_1 {
+    margin-right: 4px;
+  }
+
+  #popup_2 {
+    margin-left: 4px;
+  }
+
+  #landing_section .flower_1 {
+    width: 120px;
+    right: -28px;
+    top: auto;
+    bottom: -18px;
+  }
+
+  #landing_section .flower_landing_left {
+    width: 60px;
+    left: -18px;
+    top: 420px;
+  }
+
+  #reel_section .flower_2 {
+    width: 80px;
+    left: -24px;
+    top: 400px;
+  }
+
+  #reel_section .flower_3 {
+    width: 72px;
+    right: -18px;
+    top: auto;
+    bottom: 24px;
+  }
+
+  #steps_section .flower_steps_left {
+    width: 70px;
+    left: -16px;
+    top: 10px;
+  }
+
+  #steps_section .flower_steps_mid {
+    width: 78px;
+    left: 58%;
+    bottom: -38px;
+    top: auto;
+  }
+
+  #steps_section .flower_steps_right {
+    width: 76px;
+    right: -16px;
+    top: 55px;
+  }
+
+  #steps_section .flower_steps_bottom {
+    width: 66px;
+    left: 58%;
+    bottom: -30px;
+  }
+
+  #popup_section .flower_4 {
+    width: 72px;
+    left: 12%;
+    bottom: 14px;
+  }
+
+  #popup_section .flower_5 {
+    width: 84px;
+    right: -24px;
+    top: 38px;
+  }
+}
+
+@media (min-width: 1024px) {
+  #photo_display { height: 560px; }          /* the box the photos sit in */
+
+  #photo_1_container {                        /* left photo */
+    width: 400px;
+    height: 500px;
+    left: 31px;
+    top: 22px;
+    transform: rotate(-8deg);
+  }
+
+  #photo_2_container {                        /* center photo, on top */
+    width: 400px;
+    height: 490px;
+    left: calc(50% - 200px);
+    top: 41px;
+    transform: none;
+  }
+
+  #photo_3_container {                        /* right photo */
+    width: 400px;
+    height: 500px;
+    left: auto;
+    right: 33px;
+    top: 22px;
+    transform: rotate(8deg);
+  }
 }
