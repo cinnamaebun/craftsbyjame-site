@@ -58,7 +58,7 @@ Past events are hidden automatically. Anything in a published tab is public, so 
 - [x] Hamburger menu
 - [x] Events calendar loaded from Google Sheets
 - [x] Phone styles
-- [ ] Tablet styles
-- [ ] Desktop styles
-- [ ] Booking form submission
+- [x] Tablet styles
+- [x] Desktop styles
+- [x] Booking form submission
 
