@@ -51,6 +51,9 @@
         </div>
 
         <img class="flower flower_1" src="img/flower_maroon.png" alt="" aria-hidden="true">
+        <!-- Desktop only -->
+        <img class="flower flower_book_pink" src="img/flower_lightpink.png" alt="" aria-hidden="true">
+        <img class="flower flower_book_top" src="img/flower_maroon.png" alt="" aria-hidden="true">
       </section>
 
       <!-- Packages: one <article> card per package, same pattern each time -->
@@ -60,12 +63,13 @@
 
         <article class="package_card" id="package_a">
           <h3>PREMIUM PACKAGE A</h3>
-          <ul class="package_inclusions">
+          <ul class="package_inclusions" role="list">
             <li>Cordy Rope</li>
             <li>Max 4 Chunky Letters</li>
             <li>Max 6 Basic Spacers</li>
             <li>1 Pendant or Premium 3D</li>
           </ul>
+          <p class="package_note">*need at least ON-THE-SPOT 50 pax to avail our souvenir</p>
           <div class="package_prices">
             <p class="price_tag"><span class="ahkio">&#8369;9,450</span> 50 pax <small>&#8369;189 each</small></p>
             <p class="price_tag"><span class="ahkio">&#8369;18,000</span> 100 pax <small>&#8369;180 each</small></p>
@@ -74,12 +78,13 @@
 
         <article class="package_card" id="package_b">
           <h3>PREMIUM PACKAGE B</h3>
-          <ul class="package_inclusions">
+          <ul class="package_inclusions" role="list">
             <li>Cordy Rope</li>
             <li>Max 7 Chunky Letters</li>
             <li>Max 2 Premium Charms or Basic Spacers</li>
             <li>1 Pendant or Premium 3D</li>
           </ul>
+          <p class="package_note">*need at least ON-THE-SPOT 50 pax to avail our souvenir</p>
           <div class="package_prices">
             <p class="price_tag"><span class="ahkio">&#8369;11,950</span> 50 pax <small>&#8369;239 each</small></p>
             <p class="price_tag"><span class="ahkio">&#8369;19,900</span> 100 pax <small>&#8369;199 each</small></p>
@@ -88,7 +93,7 @@
 
         <article class="package_card" id="package_c">
           <h3>PREMIUM PACKAGE C</h3>
-          <ul class="package_inclusions">
+          <ul class="package_inclusions" role="list">
             <li>Loop Wire</li>
             <li>UNLI Letter Beads</li>
             <li>4 Spacers (Basic + Premium)</li>
@@ -115,31 +120,43 @@
           <label for="number">Contact number</label>
           <input type="tel" name="number" id="number" placeholder="Enter your phone number" autocomplete="tel" required>
 
-          <label for="social">Facebook/IG link</label>
-          <input type="url" name="social" id="social" placeholder="https://www.instagram.com/craftsbyjame" required>
-
           <label for="rate_type">Choose booking</label>
           <select name="rate_type" id="rate_type" required>
             <option value="" disabled selected>SELECT PREFERRED RATE</option>
-            <optgroup label="Premium Package A">
+            <optgroup label="PREMIUM PACKAGE A">
               <option value="package_a_50">Premium Package A (50 pax)</option>
               <option value="package_a_100">Premium Package A (100 pax)</option>
             </optgroup>
-            <optgroup label="Premium Package B">
+            <optgroup label="PREMIUM PACKAGE B">
               <option value="package_b_50">Premium Package B (50 pax)</option>
               <option value="package_b_100">Premium Package B (100 pax)</option>
             </optgroup>
-            <optgroup label="Premium Package C">
+            <optgroup label="PREMIUM PACKAGE C">
               <option value="package_c_40">Premium Package C (min. 40 pax)</option>
             </optgroup>
           </select>
+          
+          <label for="social">Facebook/IG link</label>
+          <input type="url" name="social" id="social" placeholder="https://www.instagram.com/craftsbyjame" required>
 
-          <!-- Native date picker: pure HTML, opens a calendar on tap/click -->
-          <label for="event_date">Day of event</label>
-          <input type="date" name="event_date" id="event_date" required>
+          
+
+          <!-- Custom calendar: script.js builds it inside this box and keeps the picked date in a hidden
+               field named event_date. Booked days come from a published Google Sheet (CSV): paste its link
+               into data-booked-url. While it still says PASTE..., every day from today on is open.
+               Without JavaScript the plain browser date field in <noscript> is used instead. -->
+          <span class="form_label" id="event_date_label">Day of event</span>
+          <div id="event_calendar" role="group" aria-labelledby="event_date_label"
+               data-booked-url="PASTE_PUBLISHED_BOOKED_DATES_CSV_LINK_HERE">
+            <noscript><input type="date" name="event_date" id="event_date" aria-label="Day of event" required></noscript>
+          </div>
 
           <button type="submit" id="book_submit">Submit</button>
         </form>
+
+        <!-- Desktop only -->
+        <img class="flower flower_form_left" src="img/flower_maroon.png" alt="" aria-hidden="true">
+        <img class="flower flower_form_right" src="img/flower_maroon.png" alt="" aria-hidden="true">
       </section>
     </main>
 
