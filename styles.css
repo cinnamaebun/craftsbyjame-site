@@ -27,6 +27,7 @@
   --paper: #F7F3F0;          /* fallback color while the paper image loads */
   --paper_img: url('img/paper_bg.jpg');
   --photo_shadow: 6px 5px 2px #0003;
+  --photo_border: 4px;          /* white frame around every photo: 4px on phone + tablet, 11px on desktop (set again in the 1024px block) */
 }
 
 .chelsea-market-regular {
@@ -355,16 +356,13 @@ body:has(#landing_section) #menu_open img {
 
 .photo_container {
   position: absolute;
-  padding: 4px;
-  background: white;
+  padding: var(--photo_border);
   box-shadow: var(--photo_shadow);
   box-sizing: border-box;
 }
 
 .photo_container img {
   display: block;
-  width: 550x;
-  height: 450px;
   object-fit: cover;
   object-position: center;
 }
@@ -446,7 +444,7 @@ body:has(#landing_section) #menu_open img {
 /* "Watch more on" uses the .ahkio class for its font */
 .watch_more {
   margin-top: 2px;
-  font-size: 14px;
+  font-size: 20px;
   line-height: 1.1;
   color: var(--maroon);
 }
@@ -565,7 +563,7 @@ body:has(#landing_section) #menu_open img {
   height: 215px;
   aspect-ratio: 2 / 3;
   box-sizing: border-box;
-  padding: 4px;
+  padding: var(--photo_border);
   background: var(--white);
   box-shadow: var(--photo_shadow);
   object-fit: cover;
@@ -630,7 +628,7 @@ body:has(#landing_section) #menu_open img {
   height: 227px;
   margin: 15px auto 0;
   box-sizing: border-box;
-  padding: 4px;
+  padding: var(--photo_border);
   background: var(--white);
   box-shadow: var(--photo_shadow);
   object-fit: cover;
@@ -676,7 +674,7 @@ body:has(#landing_section) #menu_open img {
   width: 151px;
   height: 146px;
   box-sizing: border-box;
-  padding: 4px;
+  padding: var(--photo_border);
   background: var(--white);
   box-shadow: var(--photo_shadow);
   object-fit: cover;
@@ -743,7 +741,7 @@ body:has(#landing_section) #menu_open img {
   width: 122px;
   height: 153px;
   box-sizing: border-box;
-  padding: 4px;
+  padding: var(--photo_border);
   background: var(--white);
   box-shadow: var(--photo_shadow);
   object-fit: cover;
@@ -1461,9 +1459,7 @@ footer p {
   display: block;
 }
 
-/* The Facebook icon is an <img>, so CSS can't change its SVG stroke (that's why the old #fb rule did nothing).
-   Instead, four tiny white drop-shadows (no blur) are stacked around the icon to thicken its lines by ~1px.
-   Raise or lower the 0.45px to make the stroke thicker or thinner. Only the footer's Facebook icon is affected. */
+/* Social icon colour and weight: see "SOCIAL ICONS" at the end of this file. */
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -1553,12 +1549,8 @@ footer p {
 
   #photo_display {
     max-width: 900px;
-    height: 500px;
+    height: 460px;
     margin: 9px auto 0;
-  }
-
-  .photo_container {
-    padding: 7px;
   }
 
   .book_button {
@@ -1568,7 +1560,7 @@ footer p {
   }
 
   .flower_1 {
-    width: 250px;
+    width: 350px;
     right: -65px;
     top: 620px;
   }
@@ -1604,7 +1596,7 @@ footer p {
   }
 
   .flower_2 {
-    width: 205px;
+    width: 105px;
     left: -16px;
     top: 500px;
   }
@@ -1651,11 +1643,11 @@ footer p {
   #popup_display img {
     width: 340px;
     height: 387px;
-    padding: 4px;
+    padding: var(--photo_border);
   }
 
   #popup_1 {
-    margin-top: 29px;
+    margin-top: 39px;
   }
 
   .flower_4 {
@@ -1693,10 +1685,10 @@ footer p {
   }
 
   #about_photo {
-    width: min(100%, 596px);
-    height: 500px;
+    width: min(100%, 506px);
+    height: 421px;
     margin: 27px auto 0;
-    padding: 4px;
+    padding: var(--photo_border);
   }
 
   /* ---- About: products ---- */
@@ -1707,7 +1699,7 @@ footer p {
   .products_heading {
     margin-top: -63px;
     font-size: 64px;                              /* phone 34px x (64 / 47), the same step-up as .jl_chubby */
-    -webkit-text-stroke: 7px var(--maroon);
+    -webkit-text-stroke: 5px var(--maroon);
     text-shadow: 0 14px 14px #0003;
   }
 
@@ -1723,7 +1715,7 @@ footer p {
   .product img {
     width: 272px;
     height: 263px;
-    padding: 4px;
+    padding: var(--photo_border);
   }
 
   .product_info {
@@ -1790,17 +1782,17 @@ footer p {
   #book_photos img {
     width: 238px;
     height: 281px;
-    padding: 4px;
+    padding: var(--photo_border);
   }
 
   #book_1 {
-    left: 92px;
+    left: 77px;
     top: 176px;
   }
 
   #book_2 {
-    left: 196px;
-    top: 250px;
+    left: 176px;
+    top: 220px;
   }
 
   #book_text {
@@ -1848,13 +1840,13 @@ footer p {
 
   .package_heading {
     font-size: 64px;
-    -webkit-text-stroke-width: 9px;
+    -webkit-text-stroke-width: 5px;
     text-shadow: 0 9px 9px #0003;
   }
 
   .package_start {
-    margin-top: -8px;
-    margin-bottom: 24px;
+    margin-top: -28px;
+    /* margin-bottom: 5px; */
     font-size: 40px;
   }
 
@@ -2037,6 +2029,9 @@ footer p {
     padding: 317px 36px 142px;
   }
 
+  .contact_heading1, .contact_heading2 {
+    font-size: 90px;             /* koulen, phone 48px x (74 / 48) */
+  }
   .contact_heading2 {
     margin-top: 4px;
   }
@@ -2084,8 +2079,8 @@ footer p {
   }
 
   #calendar_section::before {
-    width: 864px;
-    margin-left: -441px;
+    width: 900px;
+    margin-left: -448px;
   }
 
   .calendar_heading {
@@ -2158,7 +2153,7 @@ footer p {
   #calendar_section .flower_6 {
     width: 166px;
     right: -18px;
-    bottom: -14px;
+    bottom: 7px;
   }
 }
 
@@ -2263,12 +2258,13 @@ footer p {
     display: block;
   }
 
-  /* Home page only: logo hidden on desktop */
+  /* Home page only: logo is invisible on desktop, but it still takes up its space (visibility, not display:none)
+     so the nav pill sits at the same height as on every other page */
   body:has(#landing_section) #site_header {
     justify-content: flex-end;
   }
   body:has(#landing_section) #logo {
-    display: none;
+    visibility: hidden;
   }
 
   /* Hamburger & close buttons hidden on desktop */
@@ -2396,11 +2392,6 @@ footer p {
     margin: -75px 0 0;
   }
 
-  .photo_container {
-    box-sizing: border-box;
-    padding: 8px;
-  }
-
   #photo_1_container {
     width: 200px;
     height: 500px;
@@ -2429,24 +2420,6 @@ footer p {
     top: 22px;
     transform: rotate(8deg);
     z-index: 1;
-  }
-
-  #landing_section .flower_1 {
-    display: block;
-    width: 230px;
-    left: auto;
-    right: -75px;
-    top: auto;
-    bottom: -50px;
-    z-index: 3;
-  }
-
-  .flower_landing_left {
-    display: block;
-    width: 150px;
-    left: -50px;
-    top: 540px;
-    z-index: 3;
   }
 
   /* ---- Reel: video on the left, text block centered on the right ---- */
@@ -2505,10 +2478,11 @@ footer p {
     grid-column: 2;
     grid-row: 3;
     order: 0;
-    margin-top: 28px;
+    margin-top: 5px;
     font-size: clamp(22px, 2.2vw, 32px);
     line-height: 1.1;
     color: var(--maroon);
+    font-size: 46px;
   }
 
   .reel_button {
@@ -2519,8 +2493,8 @@ footer p {
     display: inline-flex;
     align-items: center;
     gap: 14px;
-    margin-top: 10px;
-    padding: 17px 48px;
+    margin-top: -1px;
+    padding: 17px 30px;
     font-size: clamp(22px, 2.2vw, 32px);
     background: var(--maroon);
     color: var(--white);
@@ -2578,7 +2552,7 @@ footer p {
     box-sizing: border-box;
     width: 100%;
     aspect-ratio: 1 / 1;
-    padding: 7px;
+    padding: var(--photo_border);
     background: var(--white);
     box-shadow: var(--photo_shadow);
   }
@@ -2588,39 +2562,6 @@ footer p {
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-
-  /* Flowers: the first three sit behind the photos, the maroon one straddles the section edge */
-  .flower_steps_left {
-    display: block;
-    width: 135px;
-    left: -4px;
-    top: 20px;
-    z-index: 0;
-  }
-
-  .flower_steps_mid {
-    display: block;
-    width: 170px;
-    left: 30%;
-    top: 210px;
-    z-index: 0;
-  }
-
-  .flower_steps_right {
-    display: block;
-    width: 150px;
-    right: 6px;
-    top: 125px;
-    z-index: 0;
-  }
-
-  .flower_steps_bottom {
-    display: block;
-    width: 157px;
-    left: 58.9%;
-    bottom: -85px;
-    z-index: 10;
   }
 
   /* ---- Pop-ups: heading + button on the left, three tilted photos on the right ---- */
@@ -2691,7 +2632,7 @@ footer p {
     width: clamp(190px, 19vw, 280px);
     height: auto;
     aspect-ratio: 285 / 397;
-    padding: 7px;
+    padding: var(--photo_border);
   }
 
   #popup_1 {
@@ -2708,16 +2649,6 @@ footer p {
     display: block;
     margin-top: 0;
     transform: rotate(-3.5deg);
-  }
-
-  #popup_section .flower_4 {
-    display: block;
-    width: 125px;
-    left: -5px;
-    right: auto;
-    top: auto;
-    bottom: 50px;
-    transform: rotate(15deg);
   }
 
   #popup_section .flower_5 {
@@ -2810,7 +2741,7 @@ footer p {
     max-width: none;
     aspect-ratio: 750 / 626;
     margin: 0;
-    padding: 7px;
+    padding: var(--photo_border);
     box-sizing: border-box;
     background: var(--white);
     box-shadow: var(--photo_shadow);
@@ -2875,7 +2806,7 @@ footer p {
     width: clamp(280px, 28.5vw, 410px);
     height: auto;
     aspect-ratio: 410 / 390;
-    padding: 6px;
+    padding: var(--photo_border);
     transform: rotate(8deg);
   }
 
@@ -2960,19 +2891,19 @@ footer p {
   /* Photo positions are measured from the page center (50%) so they stay put on wider screens */
   #book_photos img {
     margin-top: 50px;
-    padding: 5px;
+    padding: calc(var(--photo_border) / 1.9);   /* photos are scaled 1.9x, so divide to keep the visible border at 11px */
   }
 
   #book_1 {
-    left: calc(50% - 607px);
-    top: 235px;
-    transform: rotate(2deg) scale(2);
+    left: calc(50% - 557px);
+    top: 255px;
+    transform: rotate(1deg) scale(1.9);
   }
 
   #book_2 {
-    left: calc(50% - 307px);
+    left: calc(50% - 257px);
     top: 316px;
-    transform: rotate(-3deg) scale(2);
+    transform: rotate(-3deg) scale(1.9);
   }
 
   /* Anchored by its right edge (about 587px right of center) so the text grows leftwards if it is wider than expected */
@@ -3145,6 +3076,10 @@ footer p {
   /* No note under Package C, so its tag gets the same space on top */
   #package_c .package_prices {
     margin-top: 12px;
+  }
+
+  .price_tag:only-child {
+    margin-top: -12px;
   }
 
   .package_prices .price_tag,
@@ -3396,7 +3331,7 @@ footer p {
 
   #calendar_section::before {
     left: 50%;
-    width: max(1700px, 100%);
+    width: max(2200px, 100%);
     margin-left: 0;
     transform: translateX(-50%);
     border-radius: 50% 50% 0 0 / 480px 480px 0 0;
@@ -3503,7 +3438,6 @@ footer p {
   #socials img {
     width: 36px;
     height: 36px;
-    filter: brightness(0) invert(1);
   }
 }
 
@@ -3521,7 +3455,7 @@ footer p {
   align-items: stretch;
   justify-content: center;
   overflow: hidden;
-  padding: 5px;
+  padding: var(--photo_border);
   background: #fff;
   box-shadow: var(--photo_shadow);
 }
@@ -3549,7 +3483,7 @@ footer p {
   width: 100%;
   aspect-ratio: 1 / 1;
   height: auto;
-  padding: 4px;
+  padding: var(--photo_border);
   box-shadow: var(--photo_shadow);
 }
 
@@ -3579,69 +3513,43 @@ footer p {
   box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.16);
 }
 
+/* The landing flower_1 sits inside a <picture> (pink on phone/tablet, light pink on desktop). The wrapper takes up no
+   space, so the flower still positions against #landing_section. */
+#landing_section picture {
+  display: contents;
+}
+
 /* Flowers: keep the decorations near the edges instead of covering the content. */
 #landing_section .flower_1 {
-  width: 82px;
-  right: -20px;
+  width: 112px;
+  right: -30px;
   top: auto;
   bottom: -18px;
 }
 
-#landing_section .flower_landing_left {
-  width: 54px;
-  left: -22px;
-  top: 255px;
-  z-index: 3;
-}
-
 #reel_section .flower_2 {
-  width: 66px;
+  width: 96px;
   left: -22px;
   top: 245px;
 }
 
 #reel_section .flower_3 {
-  width: 58px;
-  right: -14px;
+  width: 78px;
+  right: 28px;
   top: auto;
   bottom: 20px;
 }
 
-#steps_section .flower_steps_left {
-  width: 60px;
-  left: -12px;
-  top: 8px;
-}
-
-#steps_section .flower_steps_mid {
-  width: 66px;
-  left: 58%;
-  top: auto;
-  bottom: -32px;
-}
-
-#steps_section .flower_steps_right {
-  width: 62px;
-  right: -12px;
-  top: 55px;
-}
-
-#steps_section .flower_steps_bottom {
-  width: 58px;
-  left: 58%;
-  bottom: -28px;
-}
-
 #popup_section .flower_4 {
   width: 58px;
-  left: 52%;
-  bottom: 12px;
+  left: -10px;
+  bottom: -35px;
 }
 
 #popup_section .flower_5 {
-  width: 70px;
-  right: -18px;
-  top: 30px;
+  width: 60px;
+  right: -20px;
+  top: 70px;
 }
 
 /* Desktop/tablet layout: retain the reference's wider, centered photo composition. */
@@ -3656,7 +3564,7 @@ footer p {
   }
 
   .photo_container {
-    padding: 7px;
+    padding: var(--photo_border);
   }
 
   #photo_1_container {
@@ -3681,7 +3589,7 @@ footer p {
   }
 
   #steps_section .step_photo_wrap {
-    padding: 5px;
+    padding: var(--photo_border);
   }
 
   #popup_display {
@@ -3701,75 +3609,48 @@ footer p {
   }
 
   #landing_section .flower_1 {
-    width: 120px;
+    width: 230px;
     right: -28px;
     top: auto;
     bottom: -18px;
   }
 
-  #landing_section .flower_landing_left {
-    width: 60px;
-    left: -18px;
-    top: 420px;
-  }
-
   #reel_section .flower_2 {
-    width: 80px;
-    left: -24px;
+    width: 190px;
+    left: -14px;
     top: 400px;
   }
 
   #reel_section .flower_3 {
-    width: 72px;
-    right: -18px;
+    width: 127px;
+    right: 90px;
     top: auto;
-    bottom: 24px;
-  }
-
-  #steps_section .flower_steps_left {
-    width: 70px;
-    left: -16px;
-    top: 10px;
-  }
-
-  #steps_section .flower_steps_mid {
-    width: 78px;
-    left: 58%;
-    bottom: -38px;
-    top: auto;
-  }
-
-  #steps_section .flower_steps_right {
-    width: 76px;
-    right: -16px;
-    top: 55px;
-  }
-
-  #steps_section .flower_steps_bottom {
-    width: 66px;
-    left: 58%;
-    bottom: -30px;
+    bottom: 54px;
   }
 
   #popup_section .flower_4 {
-    width: 72px;
-    left: 12%;
-    bottom: 14px;
+    width: 92px;
+    left: -23px;
+    bottom: -44px;
   }
 
   #popup_section .flower_5 {
-    width: 84px;
-    right: -24px;
-    top: 38px;
+    width: 104px;
+    right: -34px;
+    top: 168px;
   }
 }
 
 @media (min-width: 1024px) {
   #photo_display { height: 560px; }          /* the box the photos sit in */
 
+  .photo_container {
+    padding: var(--photo_border);                             /* white frame thickness */
+  }
+
   #photo_1_container {                        /* left photo */
     width: 400px;
-    height: 500px;
+    height: 468px;
     left: 31px;
     top: 22px;
     transform: rotate(-8deg);
@@ -3777,7 +3658,7 @@ footer p {
 
   #photo_2_container {                        /* center photo, on top */
     width: 400px;
-    height: 490px;
+    height: 467px;
     left: calc(50% - 200px);
     top: 41px;
     transform: none;
@@ -3785,10 +3666,95 @@ footer p {
 
   #photo_3_container {                        /* right photo */
     width: 400px;
-    height: 500px;
+    height: 468px;
     left: auto;
     right: 33px;
     top: 22px;
     transform: rotate(8deg);
   }
+
+  /* ============================================================
+     HOME PAGE FLOWERS (desktop). Edit the sizes and positions here.
+     This is the last block in the file and every selector starts with its #section, so these win over
+     the phone and tablet flower rules above. width sets the size (height follows); left/right/top/bottom
+     set the position.
+     ============================================================ */
+
+  /* Landing: bottom right, and the left one by the photos */
+  #landing_section .flower_1 {
+    display: block;
+    width: 300px;
+    left: auto;
+    right: -95px;
+    top: auto;
+    bottom: -50px;
+    z-index: 3;
+  }
+
+  #landing_section .flower_landing_left {
+    display: block;
+    width: 150px;
+    left: -30px;
+    top: 540px;
+    z-index: 3;
+  }
+
+  /* Steps: the first two sit behind the photos, the bottom one straddles the section edge */
+  #steps_section .flower_steps_left {
+    display: block;
+    width: 135px;
+    left: -4px;
+    top: 20px;
+    z-index: 0;
+  }
+
+  #steps_section .flower_steps_right {
+    display: block;
+    width: 150px;
+    right: 6px;
+    top: 125px;
+    z-index: 0;
+    transform: rotate(-30deg);
+  }
+
+  #steps_section .flower_steps_bottom {
+    display: block;
+    width: 157px;
+    left: 56.9%;
+    bottom: -85px;
+    z-index: 0;
+  }
+
+  /* Pop-ups: bottom left (the reel flowers and the pop-up flower_5 are hidden on desktop) */
+  #popup_section .flower_4 {
+    display: block;
+    width: 125px;
+    left: -5px;
+    right: auto;
+    top: auto;
+    bottom: 50px;
+    transform: rotate(32deg);
+  }
+}
+
+/* ============================================================
+   PHOTO FRAMES
+   One token drives every white photo border (homepage hero, steps, pop-ups, About photo + products, Book photos).
+   Phone and tablet: 4px. Desktop (1024px and up): 11px.
+   ============================================================ */
+@media (min-width: 1024px) {
+  :root {
+    --photo_border: 11px;
+  }
+}
+
+/* ============================================================
+   SOCIAL ICONS (footer on every page + Contact page buttons)
+   Both icons are forced to plain white so they match in every viewport. The Facebook and Instagram SVGs
+   share the same 24px grid and 2px stroke, so they also have the same visual weight.
+   ============================================================ */
+#socials img,
+#contact_buttons img {
+  filter: brightness(0) invert(1);
+  opacity: 1;
 }
