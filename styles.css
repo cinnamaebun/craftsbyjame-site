@@ -3758,3 +3758,16 @@ footer p {
   filter: brightness(0) invert(1);
   opacity: 1;
 }
+
+@supports (text-box: trim-both cap alphabetic) {
+  @media (max-width: 1023px) {
+    .heading,
+    .subheading {
+      text-box: trim-both cap alphabetic;
+    }
+    .subheading { margin-top: 4px; }   /* phone: adjust to match your design */
+  }
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .subheading { margin-top: 7px; }   /* tablet */
+  }
+}
