@@ -6,7 +6,6 @@
   src: url('fonts/JI Chubby Caps.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
 }
 
 @font-face {
@@ -14,7 +13,6 @@
   src: url('fonts/Ahkio-W00-Light.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
 }
 
 /* ============================================================
@@ -87,8 +85,8 @@ button:focus-visible {
 
 .flower {
   position: absolute;
+
   pointer-events: none;
-  filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.7));   /* shadow is done in CSS (SVG filters look pixelated on iPhones) */
 }
 
 /* About page only: pink glow in the top-left and bottom-right corners, plain paper everywhere else.
@@ -370,6 +368,7 @@ body:has(#landing_section) #menu_open img {
 }
 
 #reel_display video {
+  width: 222px;
   height: 375px;
   width: auto;
   z-index: 1;
@@ -3760,12 +3759,30 @@ footer p {
   opacity: 1;
 }
 
+@supports (text-box: trim-both cap alphabetic) {
+  @media (max-width: 1023px) {
+    .heading,
+    .subheading {
+      text-box: trim-both cap alphabetic;
+    }
+    .subheading { margin-top: 4px; }   /* phone: adjust to match your design */
+  }
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .subheading { margin-top: 7px; }   /* tablet */
+  }
+}
 
-/* ============================================================
-   iPHONE / iPAD FIX: "BY JAME" spacing under the CRAFTS heading
-   The JI Chubby Caps font sits at a different height inside its line box on iOS than on desktop Chrome,
-   so the -6px pull-up made BY JAME overlap the heading. These rules only apply on iOS (any browser on it),
-   and only below desktop width, so the desktop / F12 view is unchanged.
-   Tweak the numbers: 1px = about 3px in an iPhone screenshot.
-   ============================================================ */
-.subheading { margin-top: 20px !important; }
+/* iPhone/iPad only: the font's vertical metrics sit differently there */
+@supports (-webkit-touch-callout: none) {
+  .subheading { margin-top: 4px; }   /* phone: raise or lower until it matches the design */
+}
+@supports (-webkit-touch-callout: none) {
+  @media (min-width: 700px) {
+    .subheading { margin-top: 7px; } /* tablet */
+  }
+}
+
+.flower {
+  filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.7));
+}
+
