@@ -3762,3 +3762,12 @@ footer p {
 .flower {
   filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.7));
 }
+
+@supports (-webkit-touch-callout: none) {
+  .subheading { margin-top: 20px; }   /* phone: your final number */
+}
+@supports (-webkit-touch-callout: none) {
+  @media (min-width: 700px) {
+    .subheading { margin-top: 0px; } /* tablet: roughly your phone number x 1.8 */
+  }
+}
