@@ -3759,21 +3759,10 @@ footer p {
   opacity: 1;
 }
 
-@supports (text-box: trim-both cap alphabetic) {
-  @media (max-width: 1023px) {
-    .heading,
-    .subheading {
-      text-box: trim-both cap alphabetic;
-    }
-    .subheading { margin-top: 4px; }   /* phone: adjust to match your design */
-  }
-  @media (min-width: 700px) and (max-width: 1023px) {
-    .subheading { margin-top: 7px; }   /* tablet */
-  }
-}
 
-.subheading { margin-top: 30px !important; }
 
 .flower {
   filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.7));
 }
+
+.subheading { margin-top: 10px !important; }
