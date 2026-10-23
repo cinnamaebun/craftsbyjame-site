@@ -3764,10 +3764,10 @@ footer p {
 }
 
 @supports (-webkit-touch-callout: none) {
-  .subheading { margin-top: 20px; }   /* phone: your final number */
+  .heading { margin-top: 20px; }   /* phone: your final number */
 }
 @supports (-webkit-touch-callout: none) {
   @media (min-width: 700px) {
-    .subheading { margin-top: 0px; } /* tablet: roughly your phone number x 1.8 */
+    .heading { margin-top: 10px; } /* tablet: roughly your phone number x 1.8 */
   }
 }
