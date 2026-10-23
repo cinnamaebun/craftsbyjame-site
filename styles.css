@@ -3771,3 +3771,17 @@ footer p {
     .subheading { margin-top: 7px; }   /* tablet */
   }
 }
+
+/* iPhone/iPad only: the font's vertical metrics sit differently there */
+@supports (-webkit-touch-callout: none) {
+  .subheading { margin-top: 4px; }   /* phone: raise or lower until it matches the design */
+}
+@supports (-webkit-touch-callout: none) {
+  @media (min-width: 700px) {
+    .subheading { margin-top: 7px; } /* tablet */
+  }
+}
+
+.flower {
+  filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.7));
+}
