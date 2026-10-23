@@ -340,7 +340,7 @@ body:has(#landing_section) #menu_open img {
 }
 
 .subheading {
-  margin-top: 2px;             /* was -6px; the negative value pulled BY JAME up into the heading */
+  margin-top: 5px;             /* was -6px; the negative value pulled BY JAME up into the heading */
   font-size: 16px;
   line-height: 1.2;
   color: var(--white);
