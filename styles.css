@@ -3770,9 +3770,9 @@ footer p {
    ============================================================ */
 @supports (-webkit-touch-callout: none) {
   @media (max-width: 699px) {
-    .subheading { margin-top: 0px; }
+    #landing_section .heading { margin-top: -10px; }
   }
   @media (min-width: 700px) and (max-width: 1023px) {
-    .subheading { margin-top: 0px; }
+    #landing_section .subheading { margin-top: 0px; }
   }
 }
