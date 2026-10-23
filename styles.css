@@ -3768,4 +3768,4 @@ footer p {
    and only below desktop width, so the desktop / F12 view is unchanged.
    Tweak the numbers: 1px = about 3px in an iPhone screenshot.
    ============================================================ */
-#landing_section .subheading { margin-top: 70px !important; }
+.heading { margin-bottom: 20px !important; }
